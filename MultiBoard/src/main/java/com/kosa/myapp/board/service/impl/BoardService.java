@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kosa.myapp.board.model.Board;
 import com.kosa.myapp.board.model.BoardUploadFile;
 import com.kosa.myapp.board.service.IBoardService;
-
+//qwertyuiop
 @Service
 public class BoardService implements IBoardService {
 
