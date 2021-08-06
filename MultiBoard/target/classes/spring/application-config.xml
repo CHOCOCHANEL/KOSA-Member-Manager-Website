@@ -2,26 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- Database 연결정보 설정 -->
-	<context:property-placeholder
-	location = "classpath:database/jdbc.properties"/>
+	<context:property-placeholder location = "classpath:database/jdbc.properties"/>
 	 
-	<!-- Context 는 NameSpace 추가 -->
-	<context:component-scan base-package="com.kosa.myapp"></context:component-scan>
-	
-	<!-- MyBatis DAO와 Interface 찾기 -->
-	<mybatis-spring:scan base-package="com.kosa.myapp.hr.dao"/>
-
-	<!-- Data Source 설정 -->
 	<bean id = "dataSource" class = "org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}"/>
 		<property name="url" value="${jdbc.url}"/>
@@ -29,24 +18,32 @@
 		<property name="password" value="${jdbc.password}"/>
 	</bean>
 	
-	<!-- JDBCTemplate Bean 설정 -->
-	<!-- DAO 클래스에 JDBC Template 의존성 주입을 위해 Bean을 설정해야 함. -->
-	<bean id = "jdbcTemplate"
-		 class = "org.springframework.jdbc.core.JdbcTemplate">
+	<bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
 		<property name = "dataSource" ref = "dataSource"/>
 	</bean>
 	
-	<!-- MyBatis sqlSessionFactory 객체 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations" value="classpath:com/kosa/myapp/**/*.xml"/>
 	</bean>
 	
-	<!-- TX Manager -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" 
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+	<tx:annotation-driven/>
 	
-	<tx:annotation-driven transaction-manager="txManager"/>
+	<bean id ="exceptionResolver" class= "org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name = "exceptionMappings">
+			<props>
+				<prop key = "java.lang.RuntimeException">
+					error/runtime
+				</prop>
+			</props>
+		</property>	
+		<property name="defaultErrorView" value="error/default"/>
+	</bean>
 	
 </beans>
+<mybatis-spring:scan base-package="com.kosa.myapp.board.dao"/>
+<context:component-scan base-package="com.kosa.myapp.board.service"/>
