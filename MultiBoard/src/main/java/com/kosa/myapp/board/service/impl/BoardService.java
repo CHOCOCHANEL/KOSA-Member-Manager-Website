@@ -18,8 +18,8 @@ public class BoardService implements IBoardService {
 	
 	@Transactional
 	public void insertArticle(Board board) {
-		// TODO Auto-generated method stub
-		board.setBoardId();
+		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
+		boardRepository.insertArticle(board);
 		
 	}
 
@@ -32,98 +32,132 @@ public class BoardService implements IBoardService {
 			file.setBoardId(board.getBoardId());
 			file.setFileId(boardRepository.selectMaxFileId()+1);
 			boardRepository.insertFileData(file);
+		
 		}
 
 	}
 
 	@Override
 	public List<Board> selectArticleListByCategory(int categoryId, int page) {
-		// TODO Auto-generated method stub
-		return null;
+		int start = (page-1)*10;
+
+		return boardRepository.selectArticleListByCategory(categoryId, start, start+10);
 	}
 
 	@Override
 	public List<Board> selectArticleListByCategory(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardRepository.selectArticleLisstByCategory(categoryId,0,100);
 	}
 
 	@Override
 	public Board selectArticle(int boardId) {
-		// TODO Auto-generated method stub
-		return null;
+		boardRepository.updateReadCount(boardId);
+		return boardRepository.selectArticle(boardId);
 	}
 
 	@Override
 	public BoardUploadFile getFile(int fileId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardRepository.selectArticle(boardId);
 	}
 
+	@Transactional
 	@Override
 	public void replyArticle(Board board) {
-		// TODO Auto-generated method stub
+		boardRepository.updateReplyNumber(board.getMasterId(), getReplyNumber());
+		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
+		board.setReplyNumber(board.getReplyNumber()+1);
+		board.setReplyStep(board.getReplyStep()+1);
+		board.setreplyArticle(board);
+		
 
 	}
 
+	@Transactional
 	@Override
 	public void replyArticle(Board board, BoardUploadFile file) {
-		// TODO Auto-generated method stub
+		boardRepository.updateReplyNumber(board.getMasterId(), board.getReplyNumber());
+		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
+		board.setReplyNumber(board.getReplyNumber()+1);
+		board.setReplyStep(board.getReplyStep()+1);
+		boardRepository.replyArticle(board);
+			if(file != null && file.getFileName() != null && !file.getFileName.equals("")) {
+				file.setBoardId(board.getBoardId());
+				boardRepository.insertFileData(file);
+			}
 
 	}
 
 	@Override
 	public String getPassword(int boardId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardRepository.getPassword(boardId);
 	}
 
 	@Override
 	public void updateArticle(Board board) {
-		// TODO Auto-generated method stub
+		boardRepository.updateArticle(board);
 
 	}
 
 	@Override
 	public void updateArticle(Board board, BoardUploadFile file) {
-		// TODO Auto-generated method stub
+		 boardRepository.updateArticle(board);
+		 if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
+			 file.setBoardId(board.getBoardId());
+			 
+			 if(file.getFileId()>0){
+				 boardRepository.updateFileData(file);
+			 }else {
+				 boardRepository.insertFileData(file);
+			 }
+		 }
 
 	}
 
 	@Override
 	public Board selectDeleteArticle(int boardId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardRepository.selectDeleteArticle(boardId);
 	}
 
 	@Override
 	public void deleteArticle(int boardId, int replyNumber) {
-		// TODO Auto-generated method stub
+		if(replyNumber >0) {
+			boardRepository.deleteReplyFileData(boardId);
+			boardRepository,deleteArticleByBoardId(boardId);
+		}else if(replyNumber ==0) {
+			boardRepository.deleteFileData(boardId);
+			boardRepository.deleteArticleByMasterId(boardId);
+		}else {
+			throw new RuntimeException("WRONG_REPLYNUMBER");
+		}
 
 	}
 
 	@Override
 	public int selectTotalArticleCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardRepository.selectTotalArticleCount();
 	}
 
 	@Override
 	public int selectTotalArticleCountByCategoryId(int categoryId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardRepository.selectTotalArticleCountByCategoryId(categoryId);
 	}
 
 	@Override
 	public List<Board> searchListByContentKeyword(String keyword, int page) {
-		// TODO Auto-generated method stub
-		return null;
+		 int start = (page-1) *10;
+		return boardRepository.selectListByCountKeyword("%"+keyword+"%", start, start+10);
 	}
 
 	@Override
 	public int selectTotalArticleCountByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return boardRepository.selectTotalArticleCountByKeyword("%" +keyword+"%");
 	}
 
 }
