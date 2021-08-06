@@ -8,8 +8,6 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/mvc-config.xml</config>
-		<config>src/main/java/com/kosa/myapp/board/dao/mapper/BoardCategoryMapper.xml</config>
-		<config>src/main/java/com/kosa/myapp/board/dao/mapper/BoardMapper.xml</config>
 		<config>src/main/java/com/kosa/myapp/member/dao/mapper/MemberMapper.xml</config>
 		<config>src/main/webapp/resources/spring/application-config.xml</config>
 	</configs>
