@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -37,16 +39,12 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/file/**/"
-				
-				<mvc:mapping path="/board/write/**/"
-				
-					<mvc:mapping path="/board/update/**/"
-				
-						<mvc:mapping path="/board/reply/**/"
-				
-							<mvc:mapping path="/board/delete/**/"
-			
+			<mvc:mapping path="/file/**/"/>
+			<mvc:mapping path="/board/write/**/"/>	
+			<mvc:mapping path="/board/update/**/"/>				
+			<mvc:mapping path="/board/reply/**/"/>
+			<mvc:mapping path="/board/delete/**/"/>
+			<bean class="com.kosa.myapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -56,6 +54,6 @@
 			<value>"50000000"</value>
 		</property>
 	</bean>
-</beans>	
-	
+</beans>
+
 
