@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:SetBundle basename = "i18n/member"/>
+<fmt:setBundle basename = "i18n/member"/>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
@@ -22,26 +21,22 @@
 			</div>
 		</div>
 	</div>
-	<div class = "content">
-	<form action = "<c:url valve='/member/delete'/>" method = "post" class = "form-horizontal">
-	<div class = "form-group">
-		<label class = "control-label col-sm-2" for="password"><fmt:message key="MEMBER_PW"/></label>
-			<div class = "col-sm-4">
-				<input type = "password" name = "password" id="password" class = "form-control"><h4 style="color:red;"><fmt:message key="${message}"/></h4>
+	<div class="content">
+	<form action="<c:url valve='/member/delete'/>" method="post" class="form-horizontal">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="password"><fmt:message key="MEMBER_PW"/></label>
+			<div class="col-sm-4">
+				<input type="password" name="password" id="password" class="form-control"><h4 style="color:red;"><fmt:message key="${message}"/></h4>
 			</div>
 		</div>
-		
-		<div class = "form-group">
-			<div class = "col-sm-offset-2 col-sm-8">
-			<input type = "submit" class ="btn btn-info" value="<fmt:message
-key = "DELETE_USER_INFO"/>">
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8">
+			<input type="submit" class="btn btn-info" value="<fmt:message key = "DELETE_USER_INFO"/>">
 			</div>
 		</div>
 	</form>
 	</div>
 </div>
-
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-
 </body>
 </html>

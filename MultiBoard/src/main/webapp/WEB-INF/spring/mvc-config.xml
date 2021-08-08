@@ -36,15 +36,14 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/file/**/"/>
-			<mvc:mapping path="/board/write/**/"/>	
-			<mvc:mapping path="/board/update/**/"/>				
-			<mvc:mapping path="/board/reply/**/"/>
-			<mvc:mapping path="/board/delete/**/"/>
+			<mvc:mapping path="/file/**"/>
+			<mvc:mapping path="/board/write/**"/>	
+			<mvc:mapping path="/board/update/**"/>				
+			<mvc:mapping path="/board/reply/**"/>
+			<mvc:mapping path="/board/delete/**"/>
 			<bean class="com.kosa.myapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
 
 </beans>
 

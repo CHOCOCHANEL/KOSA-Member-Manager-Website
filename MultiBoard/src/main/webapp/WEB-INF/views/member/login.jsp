@@ -6,7 +6,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
 <body>
-<jsp:include page="/WEB-INF/vies/include/bodyHeader.jsp"/>
+<jsp:include page="/WEB-INF/views/include/bodyHeader.jsp"/>
 <div class="container">
 	<div class="pg-opt">
 		<div class="row">
