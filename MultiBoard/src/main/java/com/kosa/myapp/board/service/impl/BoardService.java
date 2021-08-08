@@ -23,7 +23,7 @@ public class BoardService implements IBoardService {
 		boardRepository.insertArticle(board);
 	}
 
-	@Override
+	@Transactional
 	public void insertArticle(Board board, BoardUploadFile file) {
 		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
 		boardRepository.insertArticle(board);
