@@ -34,10 +34,10 @@ public class BoardUploadFile {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
-	public String getFileContetType() {
+	public String getFileContentType() { // 오타 수정
 		return fileContetType;
 	}
-	public void setFileContetType(String fileContetType) {
+	public void setFileContentType(String fileContetType) {
 		this.fileContetType = fileContetType;
 	}
 	public byte[] getFileData() {
