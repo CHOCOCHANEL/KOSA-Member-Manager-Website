@@ -23,7 +23,6 @@ public class MBController {
 	@Autowired
 	IMBService mbService;
 
-
 	@RequestMapping(value = "/hr/count")
 	public String mbCount(@RequestParam(value = "jobid", required = false, 
 									defaultValue = "0") int jobid, Model model) {
@@ -31,9 +30,9 @@ public class MBController {
 		System.out.println("hr/count requested");
 		
 		if (jobid == 0) {
-			model.addAttribute("count", mbService.getMBVOCount());
+			model.addAttribute("count", mbService.getMBCount());
 		} else {
-			model.addAttribute("count", mbService.getMBVOCount());
+			model.addAttribute("count", mbService.getMBCount());
 		}
 		
 		return "hr/count"; // WEB-INF/views/hr/count.jsp 파일을 실행함

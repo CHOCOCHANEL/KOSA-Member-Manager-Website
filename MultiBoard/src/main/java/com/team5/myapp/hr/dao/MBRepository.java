@@ -51,13 +51,13 @@ public class MBRepository implements IMBRepository {
 	}
 
 	@Override
-	public int getMBVOCount() {
+	public int getMBCount() {
 		String sql = "select count(*) from MB";
 		return jdbcTemplate.queryForObject(sql, Integer.class) ;
 	}
 
 	@Override
-	public int getMBVOCount(int groupid) {
+	public int getMBCount(int groupid) {
 		String sql = "select count(*) from MB where group_id=?";
 		return jdbcTemplate.queryForObject(sql, Integer.class, groupid);
 	}

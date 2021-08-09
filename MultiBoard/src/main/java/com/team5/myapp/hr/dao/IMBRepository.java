@@ -8,9 +8,9 @@ import com.team5.myapp.hr.model.gHistoryVO;
 
 public interface IMBRepository {
 	// 전체 협회원 수 조회
-	int getMBVOCount();
+	int getMBCount();
 	// 그룹별 학생 수 조회
-	int getMBVOCount(int groupid);
+	int getMBCount(int groupid);
 	// 협회원 전체 리스트
 	List<MBVO> getMBList();
 	// 협회원 전체 조 변경 내역 리스트
