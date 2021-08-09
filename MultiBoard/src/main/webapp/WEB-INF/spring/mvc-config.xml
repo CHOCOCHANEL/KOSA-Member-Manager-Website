@@ -40,7 +40,7 @@
 			<mvc:mapping path="/board/update/**"/>				
 			<mvc:mapping path="/board/reply/**"/>
 			<mvc:mapping path="/board/delete/**"/>
-			<bean class="com.team5.myapp.common.filter.LoginInterceptor"/>
+			<bean class="com.kosa.myapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
