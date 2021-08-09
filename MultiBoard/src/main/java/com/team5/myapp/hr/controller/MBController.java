@@ -31,9 +31,9 @@ public class MBController {
 		System.out.println("hr/count requested");
 		
 		if (jobid == 0) {
-			model.addAttribute("count", mbService.getMbCount());
+			model.addAttribute("count", mbService.getMBVOCount());
 		} else {
-			model.addAttribute("count", mbService.getMbCount());
+			model.addAttribute("count", mbService.getMBVOCount());
 		}
 		
 		return "hr/count"; // WEB-INF/views/hr/count.jsp 파일을 실행함
@@ -43,35 +43,34 @@ public class MBController {
 	
 	@RequestMapping(value= {"/hr", "/hr/list"})
 	public String getAllmb(Model model) {
-		List<MBVO> mbList = mbService.getMbList();
+		List<MBVO> mbList = mbService.getMBList();
 		model.addAttribute("empList", mbList);
 		return "hr/list";
 	}
 	
 	@RequestMapping(value="/hr/{employeeId}")
 	public String getMbInfo(@PathVariable int employeeId, Model model) {
-		MBVO mb = mbService.getMbInfo(employeeId);
+		MBVO mb = mbService.getMBInfo(employeeId);
 		model.addAttribute("mb", mb);
 		return "hr/view";
 	}
 	
 	/* 구성원정보 입력 */
 	// GET 방식(사원정보 입력 폼)과 POST 방식(입력받은 데이터 DB에 저장) 구분 처리
-	// 구성원 정보 뭐 입력할건지 정해서 넣어야함
+	
+	// 구성원 정보 뭐 입력할건지 정해야함.
 	
 	@RequestMapping(value="/hr/insert", method=RequestMethod.GET)
 	public String insertMb(Model model) {
-		model.addAttribute("deptList", mbService.getAllDeptId());
 		model.addAttribute("jobList", mbService.getAllJobId());
-		model.addAttribute("managerList", mbService.getAllManagerId());
 		return "hr/insertform";
 	}
 	
 	/* 구성원 정보 입력 처리 */
 	// 사원정보 입력 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 저장한 뒤, 사원목록을 redirect함.
 	@RequestMapping(value="hr/insert", method=RequestMethod.POST)
-	public String insertMb(MBVO mb, Model model) {
-		mbService.insertMb(mb);
+	public String insertMB(MBVO mb, Model model) {
+		mbService.insertMB(mb);
 		return "redirect:/hr";
 	}
 	
@@ -79,19 +78,17 @@ public class MBController {
 	// 어떤 정보 수정할건지 정해야함
 	@RequestMapping(value="hr/update", method=RequestMethod.GET)
 	public String updateEmp(int empid, Model model) {
-		model.addAttribute("emp", mbService.getEmpInfo(empid));
-		model.addAttribute("deptList", mbService.getAllDeptId());
+		model.addAttribute("emp", mbService.getMBInfo(empid));
 		model.addAttribute("jobList", mbService.getAllJobId());
-		model.addAttribute("managerList", mbService.getAllManagerId());
 		return "hr/updateform";
 	}
 	
 	/* 구성원 정보 수정처리 */
 	// 사원정보 수정 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 수정한 뒤, 사원목로를 redirect함.
 	@RequestMapping(value="hr/update", method=RequestMethod.POST)
-	public String updateMb(MBVO mb, Model model) {
-		mbService.updateMb(mb);
-		return "redirect:/hr/" + mb.getMbId();
+	public String updateMB(MBVO mb, Model model) {
+		mbService.updateMB(mb);
+		return "redirect:/hr/";
 	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
 	}
 	
@@ -99,21 +96,21 @@ public class MBController {
 	// 삭제 시 이메일 입력 요구. GET방식으로 삭제 확인을 위한 이메일 입력 폼으로 forward함.
 	@RequestMapping(value="hr/delete", method=RequestMethod.GET)
 	public String deleteEmp(int empid, Model model) {
-		model.addAttribute("emp", mbService.getMbInfo(empid));
+		model.addAttribute("emp", mbService.getMBInfo(empid));
 		return "hr/deleteform";
 	}
 	
 	/* 구성원 정보 삭제처리 */
 	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
-	public String deleteEmp(int mbid, String email, Model model) {
-		mbService.deleteEmp(mbid, email);
+	public String deleteMB(int mbid, String email, Model model) {
+		mbService.deleteMB(mbid, email);
 		return "redirect:/hr";
 	}
 	
 	/* 구성원 과거 조 정보 조회*/
 	@RequestMapping(value= {"/hr", "/hr/past"})
 	public String getAllMb(Model model) {
-		List<MBVO> mbList = mbService.getMbList();
+		List<MBVO> mbList = mbService.getMBList();
 		model.addAttribute("mbList", mbList);
 		return "hr/past";
 	}
