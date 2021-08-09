@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.team5.myapp.hr.model.MBVO;
+import com.team5.myapp.hr.model.gHistoryVO;
 
 @Repository
 public class MBRepository implements IMBRepository {
@@ -27,46 +28,57 @@ public class MBRepository implements IMBRepository {
 			mb.setLastName(rs.getString("last_name"));
 			mb.setEmail(rs.getString("email"));
 			mb.setPhoneNumber(rs.getString("phone_number"));
-			mb.setStartDate(rs.getString("start_date"));
-			mb.setEndDate(rs.getString("end_date"));
-			
 			mb.setGroupId(rs.getInt("group_id"));
-			mb.setGroupName(rs.getString("group_name"));
 			mb.setJobId(rs.getString("job_id"));
 			mb.setManagerId(rs.getInt("manager_id"));
-			mb.setJobTitle(rs.getString("job_title"));
 			mb.setRoleId(rs.getString("role_id"));
-			mb.setRoleTitle(rs.getString("role_title"));
-			
 			return mb;
-			
 		}
-		
+	}
+	
+	private class GroupHistoryMapper implements RowMapper<gHistoryVO>{
+		@Override
+		public gHistoryVO mapRow(ResultSet rs, int count) throws SQLException{
+			gHistoryVO g = new gHistoryVO();
+			g.setMemberId(rs.getInt("member_id"));
+			g.setStartDate(rs.getDate("start_date"));
+			g.setEndDate(rs.getDate("end_date"));
+			g.setGroupId(rs.getInt("group_id"));
+			g.setGroupName(rs.getString("group_name"));
+			g.setRoleId(rs.getString("role_id"));
+			return g;
+		}
 	}
 
 	@Override
 	public int getMBVOCount() {
 		String sql = "select count(*) from MB";
-		return jdbcTemplate.queryForObject(sql,Integer.class) ;
+		return jdbcTemplate.queryForObject(sql, Integer.class) ;
 	}
 
 	@Override
-	public int getMBVOCount(int groupId) {
+	public int getMBVOCount(int groupid) {
 		String sql = "select count(*) from MB where group_id=?";
-		return jdbcTemplate.queryForObject(sql, Integer.class, groupId);
+		return jdbcTemplate.queryForObject(sql, Integer.class, groupid);
 	}
 
 	@Override
 	public List<MBVO> getMBList() {
-		String sql ="select count(*) from MB";
+		String sql ="select * from MB";
 		return jdbcTemplate.query(sql, new MBMapper());
+	}
+	
+	@Override
+	public List<gHistoryVO> getGroupHistoryList() {
+		String sql = "select * from GROUP_HISTORY ORDER BY group_id";
+		return jdbcTemplate.query(sql, new GroupHistoryMapper());
 	}
 
 	@Override
 	public MBVO getMBInfo(int memid) {
-		String sql = "select member_id, first_name, last_name, "
-				   +" email, phone_number, group_id, group_name, "
-				   +" manager_id from MB where member_id=?";
+		String sql = "select member_id, first_name, last_name, email, "
+				   +" phone_number, job_id, manager_id, group_id, role_id "
+				   +" from MB where member_id=?";
 		return jdbcTemplate.queryForObject(sql, new MBMapper(), memid);
 	}
 
@@ -74,27 +86,26 @@ public class MBRepository implements IMBRepository {
 	public void updateMB(MBVO mb) {
 		String sql = "update employees "
 				    +"set first_name=?, last_name=?, email=?, phone_number=?, "
-				    +"group_id=?, job_id=?, start_date=?, end_date=?, "
-				    +"where member_id=?";
+				    +"job_id?, manager_id?, group_id=?, role_id = ?"
+				    +"from MB where member_id=?";
 		jdbcTemplate.update(sql, mb.getFirstName(),
 								 mb.getLastName(),
 								 mb.getEmail(),
 								 mb.getPhoneNumber(),
-								 mb.getGroupId(),
 								 mb.getJobId(),
-								 mb.getStartDate(),
-								 mb.getEndDate(),
-								 mb.getGroupId());
-		
+								 mb.getManagerId(),
+								 mb.getGroupId(),
+								 mb.getRoleId(),
+								 mb.getMemberId());
 	}
 
 	@Override
 	public void insertMB(MBVO mb) {
-		String sql = "insert into MB(member_id, first_name, last_name, "
-				    +"email, phone_number, job_id, manager_id, group_id,"
-				    +"start_date, end_date values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, 
-								mb.getMemberId(),
+		String sql = "insert into MB "
+					+ "(member_id, first_name, last_name, email, phone_number, "
+				    + "job_id, manager_id, group_id, role_id) "
+				    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql,mb.getMemberId(),
 								mb.getFirstName(),
 								mb.getLastName(),
 								mb.getEmail(),
@@ -102,13 +113,22 @@ public class MBRepository implements IMBRepository {
 								mb.getJobId(),
 								mb.getManagerId(),
 								mb.getGroupId(),
-								mb.getStartDate(),
-								mb.getEndDate());
+								mb.getRoleId());
 	}
 
 	@Override
+	public List<gHistoryVO> getGroupHistory(int memid){
+		String sql = "select * "
+				+ " from GROUP_HISTORY "
+				+ " WHERE manager_id = ? "
+				+ " ORDER BY start_date, end_date";
+		return jdbcTemplate.query(sql, new GroupHistoryMapper(), memid);
+	}
+	
+	@Override
 	public void deleteGroupHistory(int memid) {
-		String sql = "delete from group_history where member_id=?";
+		String sql = "DELETE FROM group_history WHERE member_id=?";
+		jdbcTemplate.update(sql, memid);
 		
 	}
 
@@ -117,8 +137,8 @@ public class MBRepository implements IMBRepository {
 		String sql = "delete from MB where memeber_id=? and email=?";
 		//이메일 말고 다른 것으로도 변경가능~
 		jdbcTemplate.update(sql, memid, email);
-		
 	}
+	
     @Override
 	public List<Map<String, Object>> getAllGroupId() {
 		String sql = "select group_id as groupId, "
@@ -127,13 +147,14 @@ public class MBRepository implements IMBRepository {
 		return jdbcTemplate.queryForList(sql);
 	}
 
-/*	@Override
+    @Override
 	public List<Map<String, Object>> getAllManagerId() {
-		String sql = "select "
-		return null;
-		//참조할 수 있는 컬럼 존재 x, 다른 메서드로 구현 필요 매니저가 mb테이블에만 존재
+		String sql = "SELECT member.manager_id, manager.first_name, manager.last_name "
+				   + "FROM MB member "
+				   + "JOIN MB manager ON (member.manager_id = manager.member_id)";
+		return jdbcTemplate.queryForList(sql);
 	}
-*/
+
 	@Override
 	public List<Map<String, Object>> getAllJobId() {
 		String sql = "select job_id as jobId, job_title as jobTitle from job";
