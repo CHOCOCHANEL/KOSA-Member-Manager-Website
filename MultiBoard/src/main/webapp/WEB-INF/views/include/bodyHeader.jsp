@@ -57,9 +57,9 @@
 				<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong><fmt:message key="MEMBER_1"/></strong></a>
                     <ul class="dropdown-menu">
-                    	<c:forEach var="category" items="${categoryList2}">
-				        <li><a href="<c:url value='/board/cat/${category.categoryId}'/>">${category.categoryName}</a>
-			        	</c:forEach>
+				        <li><a href="<c:url value='/hr'/>">협회원 목록보기</a>
+			        	<li><a href="<c:url value='/hr/insert'/>">협회원 추가하기</a>
+			        	<li><a href="<c:url value='/hr'/>">학생 활동 내역 관리</a>
 					</ul>
 				</li>
 				
