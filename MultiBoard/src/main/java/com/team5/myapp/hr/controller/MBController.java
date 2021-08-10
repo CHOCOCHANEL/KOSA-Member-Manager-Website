@@ -43,7 +43,7 @@ public class MBController {
 	@RequestMapping(value= {"/hr", "/hr/list"})
 	public String getAllmb(Model model) {
 		List<MBVO> mbList = mbService.getMBList();
-		model.addAttribute("empList", mbList);
+		model.addAttribute("mbList", mbList);
 		return "hr/list";
 	}
 	
@@ -77,7 +77,7 @@ public class MBController {
 	// 어떤 정보 수정할건지 정해야함
 	@RequestMapping(value="hr/update", method=RequestMethod.GET)
 	public String updateEmp(int empid, Model model) {
-		model.addAttribute("emp", mbService.getMBInfo(empid));
+		model.addAttribute("mb", mbService.getMBInfo(empid));
 		model.addAttribute("jobList", mbService.getAllJobId());
 		return "hr/updateform";
 	}

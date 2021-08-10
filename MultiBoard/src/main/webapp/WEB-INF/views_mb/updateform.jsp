@@ -30,10 +30,6 @@
 	<tr>
 		<th>PHONE_NUMBER</th>
 		<td><input type="text" name="phoneNumber" value="${mb.phoneNumber}"></td>
-	</tr>
-	<tr>
-		<th>GROUP_ID</th>
-		<td><input type="text" name="groupId" value="${mb.groupId}"></td>
 	</tr>	
 
 	<tr>
@@ -56,16 +52,35 @@
 		<td>
 			<select name="managerId">
 			<c:forEach var="manager" items="${managerList}">
-				<c:if test="${emp.managerId == manager.managerId}">
+				<c:if test="${mb.managerId == manager.managerId}">
 					<option value="${manager.managerId}" selected>
 				</c:if>
-				<c:if test="${emp.managerId != manager.managerId}">
+				<c:if test="${mb.managerId != manager.managerId}">
 					<option value="${manager.managerId}">${manager.firstName}</option>
 				</c:if>
 			</c:forEach>
 			</select>
 		</td>
 	</tr>
+	
+	
+	
+	<tr>
+		<th>GROUP_ID</th>
+		<td>
+		<select name="groupId">
+		<c:forEach var="group" items="${groupList}">
+			<c:if test="${mb.groupId == group.groupId}">
+				<option value="${group.groupId}" selected>${group.groupName}</option>
+			</c:if>
+			<c:if test="${mb.groupId != group.groupId}">
+				<option value="${group.groupId}">${group.groupName}</option>
+			</c:if>
+		</c:forEach>
+		</select>
+		</td>
+	</tr>
+	
 	<tr>
 		<th>ROLE_ID</th>
 		<td><input type="text" name="roleId" value="${mb.roleId}"></td>

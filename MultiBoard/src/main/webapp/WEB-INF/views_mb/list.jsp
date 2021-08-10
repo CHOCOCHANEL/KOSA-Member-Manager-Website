@@ -8,7 +8,7 @@
 <title>CoderBy List</title>
 </head>
 <body>
-	<h1>사원 목록</h1>
+	<h1>구성원 목록</h1>
 		<a href = "<c:url value='/hr/insert'/>">신규 구성원 정보 입력</a>
 	<table border = "1">
 		<tr>
