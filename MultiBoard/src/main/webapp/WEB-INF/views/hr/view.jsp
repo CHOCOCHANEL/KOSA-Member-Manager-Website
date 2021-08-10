@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy View</title>
+<title>KOSA</title>
 </head>
 <body>
 	<h1>사원 정보 상세 조회</h1>
 	<table border="1">
 	<tr>
 		<th>MEMBER_ID</th>
-		<td>${mb.mbId}</td>
+		<td>${mb.memberId}</td>
 	</tr>
 	<tr>
 		<th>FIRST_NAME</th>
@@ -48,7 +48,7 @@
 		<td>${mb.roleId}</td>
 	</tr>
 	</table>
-	<a href="update?empid=${mb.mbId}">수정하기</a>
-	<a href="delete?empid=${mb.mbId}">삭제하기</a>
+	<a href="update?empid=${mb.memberId}">수정하기</a>
+	<a href="delete?empid=${mb.memberId}">삭제하기</a>
 </body>
 </html>

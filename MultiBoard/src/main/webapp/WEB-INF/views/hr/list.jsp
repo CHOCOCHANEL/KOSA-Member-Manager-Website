@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy List</title>
+<title>KOSA</title>
 </head>
 <body>
 	<h1>구성원 목록</h1>
-		<a href = "<c:url value='/hr/insert'/>">신규 구성원 정보 입력</a>
+	<h5>전체 구성원 수 ${count}명</h5>
+		<a href = "<c:url value='/hr/insert'/>">신규 사원 정보 입력</a>
 	<table border = "1">
 		<tr>
 			<th>MEMBER_ID</th>
-			<th>FIRST_NAME</th>
 			<th>LAST_NAME</th>
+			<th>FIRST_NAME</th>
 			<th>EMAIL</th>
 			<th>PHONE_NUMBER</th>
 			<th>JOB_ID</th>
@@ -24,9 +25,9 @@
 		</tr>
 		<c:forEach var = "mb" items = "${mbList}">
 		<tr>
-			<td><a href="<c:url value='/hr/${mb.mbId}'/>">${mb.mbId}</a></td>
-			<td>${mb.firstName}</td>
+			<td><a href="<c:url value='/hr/${mb.memberId}'/>">${mb.memberId}</a></td>
 			<td>${mb.lastName}</td>
+			<td>${mb.firstName}</td>
 			<td>${mb.email}</td>
 			<td>${mb.phoneNumber}</td>
 			<td>${mb.jobId}</td>

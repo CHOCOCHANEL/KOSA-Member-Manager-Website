@@ -158,7 +158,7 @@ public class MBRepository implements IMBRepository {
 
 	@Override
 	public List<Map<String, Object>> getAllJobId() {
-		String sql = "select job_id as jobId, job_title as jobTitle from job";
+		String sql = "select job_id as jobId, job_title as title from job";
 		return jdbcTemplate.queryForList(sql);
 	}
 

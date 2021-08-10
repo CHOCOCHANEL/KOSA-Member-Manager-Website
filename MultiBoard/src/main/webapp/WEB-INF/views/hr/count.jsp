@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset = "UTF-8">
-	<title>CoderBy Count</title>
+	<title>KOSA</title>
 </head>
 <body>
 	<h1>구성원 수 : ${count}</h1>

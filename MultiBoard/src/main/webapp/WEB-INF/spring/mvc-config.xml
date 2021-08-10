@@ -44,6 +44,16 @@
 			<bean class="com.kosa.myapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.RuntimeException">
+					error/runtime
+				</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>
 

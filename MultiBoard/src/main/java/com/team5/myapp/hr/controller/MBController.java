@@ -23,45 +23,40 @@ public class MBController {
 	@Autowired
 	IMBService mbService;
 
-	@RequestMapping(value = "/hr/count")
-	public String mbCount(@RequestParam(value = "jobid", required = false, 
-									defaultValue = "0") int jobid, Model model) {
-		
-		System.out.println("hr/count requested");
-		
-		if (jobid == 0) {
+	@RequestMapping(value="hr/count")
+	public String MBCount(@RequestParam(value="groupid", required=false, defaultValue="0") int groupid, Model model) {
+		if(groupid==0) {
 			model.addAttribute("count", mbService.getMBCount());
 		} else {
-			model.addAttribute("count", mbService.getMBCount());
+			model.addAttribute("count", mbService.getMBCount(groupid));
 		}
-		
-		return "hr/count"; // WEB-INF/views/hr/count.jsp 파일을 실행함
+		return "hr/count";
 	}
-	
-	/*구성원 목록 조회?*/
-	
+
+	/* Member 전체 목록 조회 */
 	@RequestMapping(value= {"/hr", "/hr/list"})
-	public String getAllmb(Model model) {
+	public String getAllMBs(@RequestParam(value="groupid", required=false, defaultValue="0") int groupid, Model model) {
+		if(groupid==0) model.addAttribute("count", mbService.getMBCount());
+		else model.addAttribute("count", mbService.getMBCount(groupid));
 		List<MBVO> mbList = mbService.getMBList();
 		model.addAttribute("mbList", mbList);
 		return "hr/list";
 	}
 	
-	@RequestMapping(value="/hr/{memberId}")
-	public String getMbInfo(@PathVariable int memId, Model model) {
-		MBVO mb = mbService.getMBInfo(memId);
+	@RequestMapping(value="/hr/{mdid}")
+	public String getMBInfo(@PathVariable int mbid, Model model) {
+		MBVO mb = mbService.getMBInfo(mbid);
 		model.addAttribute("mb", mb);
 		return "hr/view";
 	}
 	
 	/* 구성원정보 입력 */
 	// GET 방식(사원정보 입력 폼)과 POST 방식(입력받은 데이터 DB에 저장) 구분 처리
-	
-	// 구성원 정보 뭐 입력할건지 정해야함.
-	
 	@RequestMapping(value="/hr/insert", method=RequestMethod.GET)
-	public String insertMb(Model model) {
+	public String insertMB(Model model) {
 		model.addAttribute("jobList", mbService.getAllJobId());
+		model.addAttribute("groupList", mbService.getAllGroupId());
+		model.addAttribute("managerList", mbService.getAllManagerId());
 		return "hr/insertform";
 	}
 	
@@ -74,11 +69,12 @@ public class MBController {
 	}
 	
 	/* 구성원 정보 수정 */
-	// 어떤 정보 수정할건지 정해야함
 	@RequestMapping(value="hr/update", method=RequestMethod.GET)
-	public String updateEmp(int empid, Model model) {
-		model.addAttribute("mb", mbService.getMBInfo(empid));
+	public String updateEmp(int mbid, Model model) {
+		model.addAttribute("mb", mbService.getMBInfo(mbid));
 		model.addAttribute("jobList", mbService.getAllJobId());
+		model.addAttribute("groupList", mbService.getAllGroupId());
+		model.addAttribute("managerList", mbService.getAllManagerId());
 		return "hr/updateform";
 	}
 	
@@ -87,7 +83,7 @@ public class MBController {
 	@RequestMapping(value="hr/update", method=RequestMethod.POST)
 	public String updateMB(MBVO mb, Model model) {
 		mbService.updateMB(mb);
-		return "redirect:/hr/";
+		return "redirect:/hr";
 	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
 	}
 	

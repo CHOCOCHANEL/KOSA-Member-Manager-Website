@@ -5,16 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy Delete Form</title>
+<title>KOSA</title>
 </head>
 <body>
 	<h1>사원정보 삭제</h1>
-	<p>${mb.mbId}사원 ${mb.firstName} ${mb.lastName}의 정보를 삭제합니다.</p>
+	<p>${mb.memberId}사원 ${mb.firstName} ${mb.lastName}의 정보를 삭제합니다.</p>
 	<p>삭제후 데이터는 복구될 수 없습니다. </p>
-	<p>${mb.mbId}사원의 이메일을 입력하세요.</p>
+	<p>${mb.memberId}사원의 이메일을 입력하세요.</p>
 	<form action="./delete" method="post">
 	이메일 : <input type="text" name="email">
-	<input type="hidden" name="empid" value="${mb.mbId}">
+	<input type="hidden" name="empid" value="${mb.memberId}">
 	<input type="submit" value="삭제">
 	<a href="list">취소</a>
 	</form>

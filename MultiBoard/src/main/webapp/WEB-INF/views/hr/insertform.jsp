@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy Insert Form</title>
+<title>KOSA</title>
 </head>
 <body>
 	<h1>사원 정보 입력</h1>
@@ -46,7 +46,7 @@
 		<td>
 		<select name="managerId">
 		<c:forEach var="manager" items="${managerList}">
-			<option value="${manager.managerId}">${manager.firstName}</option>
+			<option value="${manager.managerId}">${manager.lastName + manager.firstName}</option>
 		</c:forEach>
 		</select>
 		</td>
@@ -56,14 +56,14 @@
 		<td>
 		<select name="groupId">
 		<c:forEach var="group" items="${groupList}">
-			<option value="${group.groupId}">${group.groupName}</option>
+			<option value="${group.groupId}">${group.groupId + "조" + group.groupName}</option>
 		</c:forEach>
 		</select>
 		</td>
 	</tr> 
 	<tr>
 		<th>ROLE_ID</th>
-		<td><input type="text" name="roleId"></td>
+		<td><input type="text" name="roleId">GL(Leader)/GM(Manager)</td>
 	</tr>
 	
 	<tr>

@@ -5,15 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy Update Form</title>
+<title>KOSA</title>
 </head>
 <body>
 	<h1>구성원 정보 수정</h1>
 	<form action="./update" method="post">
 	<table border="1">
 	<tr>
-		<th>MB_ID</th>
-		<td><input type="number" name="mbId" value="${mb.mbId}" readonly></td>
+		<th>MEMBER_ID</th>
+		<td><input type="number" name="memberId" value="${mb.memberId}" readonly></td>
 	</tr>
 	<tr>
 		<th>FIRST_NAME</th>
@@ -56,7 +56,7 @@
 					<option value="${manager.managerId}" selected>
 				</c:if>
 				<c:if test="${mb.managerId != manager.managerId}">
-					<option value="${manager.managerId}">${manager.firstName}</option>
+					<option value="${manager.managerId}">${manger.lastName + manager.firstName}</option>
 				</c:if>
 			</c:forEach>
 			</select>
@@ -83,7 +83,7 @@
 	
 	<tr>
 		<th>ROLE_ID</th>
-		<td><input type="text" name="roleId" value="${mb.roleId}"></td>
+		<td><input type="text" name="roleId" value="${mb.roleId}">GL(Leader)/GM(Manager)</td>
 	</tr>	
 	<tr>
 		<th>&nbsp;</th>
