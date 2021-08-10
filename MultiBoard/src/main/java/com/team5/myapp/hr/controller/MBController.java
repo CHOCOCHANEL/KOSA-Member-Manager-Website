@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team5.myapp.hr.model.MBVO;
+import com.team5.myapp.hr.model.gHistoryVO;
 import com.team5.myapp.hr.service.IMBService;
 
 @Controller
@@ -102,14 +103,20 @@ public class MBController {
 		return "redirect:/hr";
 	}
 	
-	/* 구성원 과거 조 정보 조회*/
+	/* 구성원 과거 조 정보 전부 조회*/
 	@RequestMapping(value= {"/hr", "/hr/past"})
-	public String getAllMb(Model model) {
-		List<MBVO> mbList = mbService.getMBList();
-		model.addAttribute("mbList", mbList);
+	public String getAllHistory(Model model) {
+		List<MBVO> pastList = mbService.getMBList();
+		model.addAttribute("pastList", pastList);
 		return "hr/past";
 	}
-	
+	/*특정 구성원 과거 조 정보 조회*/
+	@RequestMapping(value= "/hr/{mbId}")
+	public String getMbHistoy(@PathVariable int memId, Model model) {
+		List<gHistoryVO> gH = mbService.getGroupHistory(memId);
+		model.addAttribute("gH", gH);
+		return "hr/viewGroup";
+	}
 	
 	/* 에러 처리 */
 	@ExceptionHandler({RuntimeException.class})
