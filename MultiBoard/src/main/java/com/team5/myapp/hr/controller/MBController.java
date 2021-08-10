@@ -116,7 +116,7 @@ public class MBController {
 	
 	
 	/*특정 구성원의 과거 조 정보 조회*/
-	@RequestMapping(value= "/past/{mbid}")
+	@RequestMapping(value= "/past/{memid}")
 	public String getGroupHistory(@PathVariable int mbId, Model model) 
 	{
 		List<gHistoryVO> history = mbService.getGroupHistory(mbId);
