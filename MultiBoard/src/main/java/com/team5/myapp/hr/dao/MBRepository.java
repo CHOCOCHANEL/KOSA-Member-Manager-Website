@@ -75,11 +75,11 @@ public class MBRepository implements IMBRepository {
 	}
 
 	@Override
-	public MBVO getMBInfo(int memid) {
+	public MBVO getMBInfo(int mbid) {
 		String sql = "select member_id, first_name, last_name, email, "
 				   +" phone_number, job_id, manager_id, group_id, role_id "
 				   +" from MB where member_id=?";
-		return jdbcTemplate.queryForObject(sql, new MBMapper(), memid);
+		return jdbcTemplate.queryForObject(sql, new MBMapper(), mbid);
 	}
 
 	@Override
@@ -118,26 +118,26 @@ public class MBRepository implements IMBRepository {
 	}
 
 	@Override
-	public List<gHistoryVO> getGroupHistory(int memid){
+	public List<gHistoryVO> getGroupHistory(int mbid){
 		String sql = "select * "
 				+ " from GROUP_HISTORY "
 				+ " WHERE member_id = ? "
 				+ " ORDER BY start_date, end_date";
-		return jdbcTemplate.query(sql, new GroupHistoryMapper(), memid);
+		return jdbcTemplate.query(sql, new GroupHistoryMapper(), mbid);
 	}
 	
 	@Override
-	public void deleteGroupHistory(int memid) {
+	public void deleteGroupHistory(int mbid) {
 		String sql = "DELETE FROM group_history WHERE member_id=?";
-		jdbcTemplate.update(sql, memid);
+		jdbcTemplate.update(sql, mbid);
 		
 	}
 
 	@Override
-	public void deleteMB(int memid, String email) {
+	public void deleteMB(int mbid, String email) {
 		String sql = "DELETE from MB WHERE member_id=? and email=?";
 		//이메일 말고 다른 것으로도 변경가능~
-		jdbcTemplate.update(sql, memid, email);
+		jdbcTemplate.update(sql, mbid, email);
 	}
 	
     @Override

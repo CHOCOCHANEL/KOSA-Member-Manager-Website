@@ -66,7 +66,7 @@
 	
 	<tr>
 		<th>ROLE_ID</th>
-		<td><input type="text" name="roleId">GL(Leader)/GM(Manager)</td>
+		<td><input type="text" name="roleId">GL(Leader)/GM(Member)</td>
 	</tr>
 	
 	<tr>

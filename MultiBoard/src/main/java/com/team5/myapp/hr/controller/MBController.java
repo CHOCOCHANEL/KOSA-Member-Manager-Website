@@ -24,6 +24,7 @@ public class MBController {
 	@Autowired
 	IMBService mbService;
 
+	// CONFIRMED
 	@RequestMapping(value="hr/count")
 	public String MBCount(@RequestParam(value="groupid", required=false, defaultValue="0") int groupid, Model model) {
 		if(groupid==0) {
@@ -35,6 +36,7 @@ public class MBController {
 	}
 
 	/* Member 전체 목록 조회 */
+	// CONFIRMED
 	@RequestMapping(value= {"/hr", "/hr/list"})
 	public String getAllMBs(@RequestParam(value="groupid", required=false, defaultValue="0") int groupid, Model model) {
 		if(groupid==0) model.addAttribute("count", mbService.getMBCount());
@@ -45,6 +47,7 @@ public class MBController {
 	}
 	
 	/* Member 상세 정보 조회 */
+	// CONFIRMED
 	@RequestMapping(value="/hr/{memberId}")
 	public String getMBInfo(@PathVariable int memberId, Model model) {
 		MBVO mb = mbService.getMBInfo(memberId);
@@ -54,6 +57,7 @@ public class MBController {
 	
 	/* Member 정보 입력 */
 	// GET 방식(사원정보 입력 폼)과 POST 방식(입력받은 데이터 DB에 저장) 구분 처리
+	// CONFIRMED
 	@RequestMapping(value="/hr/insert", method=RequestMethod.GET)
 	public String insertMB(Model model) {
 		model.addAttribute("jobList", mbService.getAllJobId());
@@ -65,6 +69,7 @@ public class MBController {
 	
 	/* 구성원 정보 입력 처리 */
 	// 사원정보 입력 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 저장한 뒤, 사원목록을 redirect함.
+	// CONFIRMED
 	@RequestMapping(value="/hr/insert", method=RequestMethod.POST)
 	public String insertMB(MBVO mb, Model model) {
 		mbService.insertMB(mb);
@@ -72,6 +77,7 @@ public class MBController {
 	}
 	
 	/* 구성원 정보 수정 */
+	// CONFIRMED
 	@RequestMapping(value="/hr/update", method=RequestMethod.GET)
 	public String updateMB(int mbid, Model model){
 		model.addAttribute("mb", mbService.getMBInfo(mbid));
@@ -83,6 +89,7 @@ public class MBController {
 	
 	/* 구성원 정보 수정처리 */
 	// 사원정보 수정 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 수정한 뒤, 사원목로를 redirect함.
+	// CONFIRMED
 	@RequestMapping(value="hr/update", method=RequestMethod.POST)
 	public String updateMB(MBVO mb, Model model) {
 		mbService.updateMB(mb);
@@ -101,9 +108,8 @@ public class MBController {
 	// 사원정보 수정 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 수정한 뒤, 사원목로를 redirect함.
 	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
 	public String deleteMB(int mbid, String email, Model model) {
-		mbService.deleteMB(mbid,email);
+		mbService.deleteMB(mbid, email);
 		return "redirect:/hr";
-	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
 	}
 	
 	/*모든 구성원 과거 조 정보 조회*/
@@ -118,9 +124,9 @@ public class MBController {
 	
 	/*특정 구성원의 과거 조 정보 조회*/
 	@RequestMapping(value= "/past/{memid}")
-	public String getGroupHistory(@PathVariable int mbId, Model model) 
+	public String getGroupHistory(@PathVariable int mbid, Model model) 
 	{
-		List<gHistoryVO> history = mbService.getGroupHistory(mbId);
+		List<gHistoryVO> history = mbService.getGroupHistory(mbid);
 		model.addAttribute("history",history);
 		return "hr/past";
 	}

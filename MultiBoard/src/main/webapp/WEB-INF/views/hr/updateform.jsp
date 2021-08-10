@@ -53,18 +53,16 @@
 		<td>
 			<select name="managerId">
 			<c:forEach var="manager" items="${managerList}">
-				<c:if test="${mb.managerId == manager.managerId}">
-					<option value="${manager.managerId}" selected>
+				<c:if test="${mb.managerId == manager.memberId}">
+					<option value="${mb.managerId}" selected>${manager.lastName}${manager.firstName}</option>
 				</c:if>
-				<c:if test="${mb.managerId != manager.managerId}">
-					<option value="${manager.managerId}">${manger.lastName + manager.firstName}</option>
+				<c:if test="${mb.managerId != manager.memberId}">
+					<option value="${mb.managerId}">${manager.lastName}${manager.firstName}</option>
 				</c:if>
 			</c:forEach>
 			</select>
 		</td>
 	</tr>
-	
-	
 	
 	<tr>
 		<th>GROUP_ID</th>
@@ -84,7 +82,7 @@
 	
 	<tr>
 		<th>ROLE_ID</th>
-		<td><input type="text" name="roleId" value="${mb.roleId}">GL(Leader)/GM(Manager)</td>
+		<td><input type="text" name="roleId" value="${mb.roleId}">GL(Leader)/GM(Member)</td>
 	</tr>	
 	<tr>
 		<th>&nbsp;</th>
