@@ -5,7 +5,7 @@ import java.util.List;
 import com.kosa.myapp.member.model.Member;
 
 public interface IMemberRepository {
-	void insertMember(Member member);
+	void insertMember(Member member) ;
 	Member selectMember(String userid);
 	List<Member> selectAllMembers();
 	void updateMember(Member member);

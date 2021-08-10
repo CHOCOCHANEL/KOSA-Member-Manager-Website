@@ -6,8 +6,7 @@ import com.kosa.myapp.board.model.Board;
 import com.kosa.myapp.board.model.BoardUploadFile;
 
 public interface IBoardService {
-	
-	void insertArticle(Board board);
+	void insertArticle(Board boardId);
 	void insertArticle(Board boardId, BoardUploadFile file);
 	
 	List<Board> selectArticleListByCategory(int categoryId, int page);
@@ -19,7 +18,7 @@ public interface IBoardService {
 	
 	void replyArticle(Board board);
 	void replyArticle(Board board, BoardUploadFile file);
-	
+
 	String getPassword(int boardId);
 	
 	void updateArticle(Board board);
@@ -33,5 +32,4 @@ public interface IBoardService {
 	
 	List<Board> searchListByContentKeyword(String keyword, int page);
 	int selectTotalArticleCountByKeyword(String keyword);
-
 }

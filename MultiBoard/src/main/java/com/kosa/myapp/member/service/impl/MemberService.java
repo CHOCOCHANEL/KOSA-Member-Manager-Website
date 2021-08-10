@@ -11,14 +11,13 @@ import com.kosa.myapp.member.service.IMemberService;
 
 @Service
 public class MemberService implements IMemberService {
-	
+
 	@Autowired
 	IMemberRepository memberDao;
-
+	
 	@Override
 	public void insertMember(Member member) {
 		memberDao.insertMember(member);
-
 	}
 
 	@Override

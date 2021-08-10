@@ -32,32 +32,32 @@ import com.kosa.myapp.board.service.IBoardService;
 @Controller
 public class BoardController {
 	static final Logger logger = Logger.getLogger(BoardController.class);
-	
+
 	@Autowired
 	IBoardService boardService;
 	
 	@Autowired
 	IBoardCategoryService categoryService;
-	
+		
 	@RequestMapping("/board/cat/{categoryId}/{page}")
 	public String getListByCategory(@PathVariable int categoryId, @PathVariable int page, HttpSession session, Model model) {
 		session.setAttribute("page", page);
 		model.addAttribute("categoryId", categoryId);
-		
+
 		List<Board> boardList = boardService.selectArticleListByCategory(categoryId, page);
 		model.addAttribute("boardList", boardList);
-		
+
 		// paging start
 		int bbsCount = boardService.selectTotalArticleCountByCategoryId(categoryId);
 		int totalPage = 0;
 		if(bbsCount > 0) {
-			totalPage = (int)Math.ceil(bbsCount/10.0);
+			totalPage= (int)Math.ceil(bbsCount/10.0);
 		}
 		model.addAttribute("totalPageCount", totalPage);
 		model.addAttribute("page", page);
 		return "board/list";
 	}
-	
+
 	@RequestMapping("/board/cat/{categoryId}")
 	public String getListByCategory(@PathVariable int categoryId, HttpSession session, Model model) {
 		return getListByCategory(categoryId, 1, session, model);
@@ -72,13 +72,13 @@ public class BoardController {
 		logger.info("getBoardDetails " + board.toString());
 		return "board/view";
 	}
-	
+
 	@RequestMapping("/board/{boardId}")
 	public String getBoardDetails(@PathVariable int boardId, Model model) {
 		return getBoardDetails(boardId, 1, model);
 	}
 	
-	@RequestMapping(value="/board/write/{categoryId}")
+	@RequestMapping(value="/board/write/{categoryId}", method=RequestMethod.GET)
 	public String writeArticle(@PathVariable int categoryId, Model model) {
 		List<BoardCategory> categoryList = categoryService.selectAllCategory();
 		model.addAttribute("categoryList", categoryList);
@@ -89,8 +89,8 @@ public class BoardController {
 	@RequestMapping(value="/board/write", method=RequestMethod.POST)
 	public String writeArticle(Board board, BindingResult result, RedirectAttributes redirectAttrs) {
 		logger.info("/board/write : " + board.toString());
-		
-		try {
+
+		try{
 			board.setTitle(Jsoup.clean(board.getTitle(), Whitelist.basic()));
 			board.setContent(Jsoup.clean(board.getContent(), Whitelist.basic()));
 			MultipartFile mfile = board.getFile();
@@ -102,20 +102,20 @@ public class BoardController {
 				file.setFileContentType(mfile.getContentType());
 				file.setFileData(mfile.getBytes());
 				logger.info("/board/write : " + file.toString());
-				
+
 				boardService.insertArticle(board, file);
-			} else {
+			}else {
 				boardService.insertArticle(board);
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message", e.getMessage());
 		}
 		return "redirect:/board/cat/"+board.getCategoryId();
 	}
-	
+
 	@RequestMapping("/file/{fileId}")
-	public ResponseEntity<byte[]> getFile(@PathVariable int fileId){
+	public ResponseEntity<byte[]> getFile(@PathVariable int fileId) {
 		BoardUploadFile file = boardService.getFile(fileId);
 		logger.info("getFile " + file.toString());
 		final HttpHeaders headers = new HttpHeaders();
@@ -132,7 +132,7 @@ public class BoardController {
 		board.setWriter("");
 		board.setEmail("");
 		board.setTitle("[Re]"+board.getTitle());
-		board.setContent("\n\n\n-------------\n" + board.getContent());
+		board.setContent("\n\n\n----------\n" + board.getContent());
 		model.addAttribute("board", board);
 		model.addAttribute("next", "reply");
 		return "board/reply";
@@ -141,8 +141,13 @@ public class BoardController {
 	@RequestMapping(value="/board/reply", method=RequestMethod.POST)
 	public String replyArticle(Board board, BindingResult result, RedirectAttributes redirectAttrs, HttpSession session) {
 		logger.info("/board/reply : " + board.toString());
-		
-		try {
+
+//	    if(result.hasErrors()) {
+//	    	logger.debug(result.getErrorCount());
+//	        return "board/write";
+//	    }
+
+		try{
 			board.setTitle(Jsoup.clean(board.getTitle(), Whitelist.basic()));
 			board.setContent(Jsoup.clean(board.getContent(), Whitelist.basic()));
 			MultipartFile mfile = board.getFile();
@@ -154,23 +159,23 @@ public class BoardController {
 				file.setFileContentType(mfile.getContentType());
 				file.setFileData(mfile.getBytes());
 				logger.info("/board/reply : " + file.toString());
-				
+
 				boardService.replyArticle(board, file);
-			} else {
+			}else {
 				boardService.replyArticle(board);
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message", e.getMessage());
 		}
 		
 		if(session.getAttribute("page") != null) {
-			return "redirect:/board/cat/" + board.getCategoryId() + "/" + (Integer)session.getAttribute("page");
-		} else {
-			return "redirect:/board/cat/" + board.getCategoryId();
+			return "redirect:/board/cat/"+board.getCategoryId()+"/"+(Integer)session.getAttribute("page");
+		}else {
+			return "redirect:/board/cat/"+board.getCategoryId(); 
 		}
 	}
-	
+
 	@RequestMapping(value="/board/update/{boardId}", method=RequestMethod.GET)
 	public String updateArticle(@PathVariable int boardId, Model model) {
 		List<BoardCategory> categoryList = categoryService.selectAllCategory();
@@ -180,11 +185,11 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "board/update";
 	}
-	
+
 	@RequestMapping(value="/board/update", method=RequestMethod.POST)
 	public String updateArticle(Board board, BindingResult result, HttpSession session, RedirectAttributes redirectAttrs) {
 		logger.info("/board/update " + board.toString());
-		try {
+		try{
 			board.setTitle(Jsoup.clean(board.getTitle(), Whitelist.basic()));
 			board.setContent(Jsoup.clean(board.getContent(), Whitelist.basic()));
 			MultipartFile mfile = board.getFile();
@@ -198,16 +203,17 @@ public class BoardController {
 				file.setFileData(mfile.getBytes());
 				logger.info("/board/update : " + file.toString());
 				boardService.updateArticle(board, file);
-			} else {
+			}else {
 				boardService.updateArticle(board);
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message", e.getMessage());
 		}
-		return "redirect:/board/" + board.getBoardId();
+
+		return "redirect:/board/"+board.getBoardId();
 	}
-	
+
 	@RequestMapping(value="/board/delete/{boardId}", method=RequestMethod.GET)
 	public String deleteArticle(@PathVariable int boardId, Model model) {
 		Board board = boardService.selectDeleteArticle(boardId);
@@ -221,42 +227,42 @@ public class BoardController {
 	public String deleteArticle(Board board, BindingResult result, HttpSession session, Model model) {
 		try {
 			String dbpw = boardService.getPassword(board.getBoardId());
-			
+
 			if(dbpw.equals(board.getPassword())) {
 				boardService.deleteArticle(board.getBoardId(), board.getReplyNumber());
-				return "redirect:/board/cat/" + board.getCategoryId() + "/" + (Integer)session.getAttribute("page");
-			} else {
+				return "redirect:/board/cat/"+board.getCategoryId()+"/"+(Integer)session.getAttribute("page");
+			}else {
 				model.addAttribute("message", "WRONG_PASSWORD_NOT_DELETED");
 				return "error/runtime";
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 			return "error/runtime";
 		}
 	}
-	
+
 	@RequestMapping("/board/search/{page}")
 	public String search(@RequestParam(required=false, defaultValue="") String keyword, @PathVariable int page, HttpSession session, Model model) {
 		try {
 			List<Board> boardList = boardService.searchListByContentKeyword(keyword, page);
 			model.addAttribute("boardList", boardList);
-			
-			//paging start
+	
+			// paging start
 			int bbsCount = boardService.selectTotalArticleCountByKeyword(keyword);
 			int totalPage = 0;
 			System.out.println(bbsCount);
 			if(bbsCount > 0) {
-				totalPage = (int)Math.ceil(bbsCount/10.0);
+				totalPage= (int)Math.ceil(bbsCount/10.0);
 			}
 			model.addAttribute("totalPageCount", totalPage);
 			model.addAttribute("page", page);
 			model.addAttribute("keyword", keyword);
-			logger.info(totalPage + ":" + page + ":" + keyword);			
-		} catch (Exception e) {
+			logger.info(totalPage + ":" + page + ":" + keyword);
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return "board/search";
 	}
-	
+
 }

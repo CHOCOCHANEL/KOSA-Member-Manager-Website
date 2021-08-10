@@ -3,6 +3,7 @@ package com.kosa.myapp.board.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,34 +16,35 @@ import com.kosa.myapp.board.service.IBoardService;
 public class BoardService implements IBoardService {
 
 	@Autowired
+	@Qualifier("IBoardRepository")
 	IBoardRepository boardRepository;
-	
+
 	@Transactional
 	public void insertArticle(Board board) {
 		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
 		boardRepository.insertArticle(board);
 	}
-
+	
 	@Transactional
 	public void insertArticle(Board board, BoardUploadFile file) {
 		board.setBoardId(boardRepository.selectMaxArticleNo()+1);
 		boardRepository.insertArticle(board);
-		if(file !=null && file.getFileName() != null && !file.getFileName().equals("")) {
-			file.setBoardId(board.getBoardId());
-			file.setFileId(boardRepository.selectMaxFileId()+1);
-			boardRepository.insertFileData(file);
-		}
+        if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
+        	file.setBoardId(board.getBoardId());
+        	file.setFileId(boardRepository.selectMaxFileId()+1);
+        	boardRepository.insertFileData(file);
+        }
 	}
 
 	@Override
 	public List<Board> selectArticleListByCategory(int categoryId, int page) {
-		int start = (page-1)*10;
+		int start = (page-1) * 10;
 		return boardRepository.selectArticleListByCategory(categoryId, start, start+10);
 	}
 
 	@Override
 	public List<Board> selectArticleListByCategory(int categoryId) {
-		return boardRepository.selectArticleListByCategory(categoryId,0,100);
+		return boardRepository.selectArticleListByCategory(categoryId, 0, 100);
 	}
 
 	@Transactional
@@ -55,7 +57,7 @@ public class BoardService implements IBoardService {
 	public BoardUploadFile getFile(int fileId) {
 		return boardRepository.getFile(fileId);
 	}
-
+	
 	@Transactional
 	public void replyArticle(Board board) {
 		boardRepository.updateReplyNumber(board.getMasterId(), board.getReplyNumber());
@@ -72,12 +74,12 @@ public class BoardService implements IBoardService {
 		board.setReplyNumber(board.getReplyNumber()+1);
 		board.setReplyStep(board.getReplyStep()+1);
 		boardRepository.replyArticle(board);
-			if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
-				file.setBoardId(board.getBoardId());
-				boardRepository.insertFileData(file);
-			}
+        if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
+        	file.setBoardId(board.getBoardId());
+        	boardRepository.insertFileData(file);
+        }
 	}
-
+	
 	@Override
 	public String getPassword(int boardId) {
 		return boardRepository.getPassword(boardId);
@@ -86,34 +88,33 @@ public class BoardService implements IBoardService {
 	@Override
 	public void updateArticle(Board board) {
 		boardRepository.updateArticle(board);
-
 	}
 
 	@Transactional
 	public void updateArticle(Board board, BoardUploadFile file) {
-		 boardRepository.updateArticle(board);
-		 if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
-			 file.setBoardId(board.getBoardId());
-			 
-			 if(file.getFileId()>0){
-				 boardRepository.updateFileData(file);
-			 }else {
-				 boardRepository.insertFileData(file);
-			 }
-		 }
+		boardRepository.updateArticle(board);
+        if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
+        	file.setBoardId(board.getBoardId());
+//        	System.out.println(file.toString());
+        	if(file.getFileId()>0) {
+        		boardRepository.updateFileData(file);
+        	}else {
+        		boardRepository.insertFileData(file);
+        	}
+        }
 	}
-
+	
 	@Override
 	public Board selectDeleteArticle(int boardId) {
 		return boardRepository.selectDeleteArticle(boardId);
 	}
-
+	
 	@Transactional
 	public void deleteArticle(int boardId, int replyNumber) {
-		if(replyNumber >0) {
+		if(replyNumber>0) {
 			boardRepository.deleteReplyFileData(boardId);
 			boardRepository.deleteArticleByBoardId(boardId);
-		}else if(replyNumber ==0) {
+		}else if(replyNumber==0){
 			boardRepository.deleteFileData(boardId);
 			boardRepository.deleteArticleByMasterId(boardId);
 		}else {
@@ -133,7 +134,7 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public List<Board> searchListByContentKeyword(String keyword, int page) {
-		int start = (page-1) *10;
+		int start = (page-1) * 10;
 		return boardRepository.searchListByContentKeyword("%"+keyword+"%", start, start+10);
 	}
 

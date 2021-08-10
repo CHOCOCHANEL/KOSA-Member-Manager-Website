@@ -1,18 +1,20 @@
 package com.kosa.myapp.board.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kosa.myapp.board.dao.IBoardCategoryRepository;
 import com.kosa.myapp.board.model.BoardCategory;
 import com.kosa.myapp.board.service.IBoardCategoryService;
 
 @Service
-public class BoardCategoryService implements IBoardCategoryService {
-	
+public class BoardCategoryService implements IBoardCategoryService{
+
 	@Autowired
 	IBoardCategoryRepository boardCategoryRepository;
-
+	
 	@Override
 	public List<BoardCategory> selectAllCategory() {
 		return boardCategoryRepository.selectAllCategory();

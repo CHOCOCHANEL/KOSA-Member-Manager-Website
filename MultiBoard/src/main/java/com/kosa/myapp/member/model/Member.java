@@ -1,11 +1,12 @@
 package com.kosa.myapp.member.model;
 
 public class Member {
-	private String userid;
-	private String name;
-	private String password;
-	private String phone;
-	private String email;
+    private String userid;
+    private String name;
+    private String password;
+    private String phone;
+    private String email;
+    
 	public String getUserid() {
 		return userid;
 	}
@@ -36,5 +37,5 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 }

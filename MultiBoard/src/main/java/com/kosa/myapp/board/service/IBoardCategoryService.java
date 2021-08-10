@@ -2,6 +2,7 @@ package com.kosa.myapp.board.service;
 
 import java.util.List;
 
+
 import com.kosa.myapp.board.model.BoardCategory;
 
 public interface IBoardCategoryService {

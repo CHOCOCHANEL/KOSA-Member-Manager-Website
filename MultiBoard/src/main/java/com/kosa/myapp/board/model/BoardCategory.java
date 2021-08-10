@@ -1,13 +1,13 @@
 package com.kosa.myapp.board.model;
 
 public class BoardCategory {
+	private int categoryId;
+	private int categoryClass1;
+	private int categoryClass2;
+	private String categoryName;
+	private String categoryDescription;
+	private int categoryOrder;
 	
-	private int categoryId; //카테고리 아이디
-	private int categoryClass1; //카테고리 대분류
-	private int categoryClass2; //카테고리 중분류
-	private String categoryName; //카테고리 이름
-	private String categoryDescription; //카테고리 설명
-	private int categoryOrder; //카테고리를 출력할 때의 순서
 	public int getCategoryId() {
 		return categoryId;
 	}
@@ -50,5 +50,4 @@ public class BoardCategory {
 				+ categoryClass2 + ", categoryName=" + categoryName + ", categoryDescription=" + categoryDescription
 				+ ", categoryOrder=" + categoryOrder + "]";
 	}
-
 }

@@ -1,6 +1,7 @@
 package com.kosa.myapp.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -13,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kosa.myapp.member.model.Member;
 import com.kosa.myapp.member.service.IMemberService;
 
-// MemberController는 회원 관리 기능 요청을 처리하기 위한 컨트롤러(핸들러)입니다.
-
 @Controller
 public class MemberController {
 	static final Logger logger = Logger.getLogger(MemberController.class);
-	
+
 	@Autowired
 	IMemberService memberService;
-	
+
 	@RequestMapping(value="/member/insert", method=RequestMethod.GET)
 	public String joinForm() {
 		return "member/form";
@@ -42,28 +41,28 @@ public class MemberController {
 	@RequestMapping(value="/member/login", method=RequestMethod.POST)
 	public String login(String userid, String password, HttpSession session, Model model) {
 		Member member = memberService.selectMember(userid);
-		if(member!=null) {
+		if(member != null) {
 			String dbPassword = member.getPassword();
-			if(dbPassword == null) {
+				if(dbPassword == null) {
 				//아이디가 없음
 				model.addAttribute("message", "NOT_VALID_USER");
-			} else {
+			}else {
 				//아이디 있음
 				if(dbPassword.equals(password)) {
 					//비밀번호 일치
 					session.setAttribute("userid", userid);
 					session.setAttribute("name", member.getName());
 					session.setAttribute("email", member.getEmail());
-					return "member/login";
-				} else {
+						return "member/login";
+				}else {
 					//비밀번호 불일치
 					model.addAttribute("message", "WRONG_PASSWORD");
 				}
 			}
-		} else {
+		}else {
 			model.addAttribute("message", "USER_NOT_FOUND");
 		}
-		session.invalidate();
+		session.invalidate();	
 		return "member/login";
 	}
 	
@@ -81,7 +80,7 @@ public class MemberController {
 			model.addAttribute("member", member);
 			model.addAttribute("message", "UPDATE_USER_INFO");
 			return "member/update";
-		} else {
+		}else {
 			//userid가 세션에 없을 경우 (로그인 하지 않았을 경우)
 			model.addAttribute("message", "NOT_LOGIN_USER");
 			return "member/login";
@@ -90,13 +89,13 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/update", method=RequestMethod.POST)
 	public String updateMember(Member member, HttpSession session, Model model) {
-		try {
+		try{
 			memberService.updateMember(member);
 			model.addAttribute("message", "UPDATED_MEMBER_INFO");
 			model.addAttribute("member", member);
 			session.setAttribute("email", member.getEmail());
 			return "member/login";
-		} catch(Exception e) {
+		}catch(Exception e){
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 			return "member/error";
@@ -111,7 +110,7 @@ public class MemberController {
 			model.addAttribute("member", member);
 			model.addAttribute("message", "MEMBER_PW_RE");
 			return "member/delete";
-		} else {
+		}else {
 			//userid가 세션에 없을 경우 (로그인 하지 않았을 경우)
 			model.addAttribute("message", "NOT_LOGIN_USER");
 			return "member/login";
@@ -126,17 +125,18 @@ public class MemberController {
 			String dbpw = memberService.getPassword(member.getUserid());
 			if(password != null && password.equals(dbpw)) {
 				member.setPassword(password);
-				memberService.deleteMember(member);
-				session.invalidate(); //삭제되었으면 로그아웃 처리
+				memberService.deleteMember(member) ;
+				session.invalidate();//삭제되었으면 로그아웃 처리
 				return "member/login";
-			} else {
+			}else {
 				model.addAttribute("message", "WRONG_PASSWORD");
 				return "member/delete";
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			model.addAttribute("message", "DELETE_FAIL");
 			e.printStackTrace();
 			return "member/delete";
 		}
 	}
 }
+
