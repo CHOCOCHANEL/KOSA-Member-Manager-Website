@@ -47,7 +47,7 @@ public class MBController {
 		return "hr/list";
 	}
 	
-	@RequestMapping(value="/hr/{employeeId}")
+	@RequestMapping(value="/hr/{memberId}")
 	public String getMbInfo(@PathVariable int memId, Model model) {
 		MBVO mb = mbService.getMBInfo(memId);
 		model.addAttribute("mb", mb);
