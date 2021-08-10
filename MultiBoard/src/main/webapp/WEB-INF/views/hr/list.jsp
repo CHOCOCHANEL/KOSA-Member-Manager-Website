@@ -8,8 +8,9 @@
 <title>KOSA</title>
 </head>
 <body>
-	<h1>구성원 목록</h1>
-	<h5>전체 구성원 수 ${count}명</h5>
+	<h2>구성원 목록</h2>
+	<h5>Displayed Members : ${count}</h5>
+		<a href = "<c:url value='/'/>">HOME</a>
 		<a href = "<c:url value='/hr/insert'/>">신규 구성원 정보 입력</a>
 	<table border = "1">
 		<tr>

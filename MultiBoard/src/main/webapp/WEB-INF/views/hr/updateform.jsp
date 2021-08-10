@@ -8,7 +8,8 @@
 <title>KOSA</title>
 </head>
 <body>
-	<h1>구성원 정보 수정</h1>
+	<h2>구성원 정보 수정</h2>
+	<a href = "<c:url value='/'/>">HOME</a>
 	<form action="./update" method="post">
 	<table border="1">
 	<tr>

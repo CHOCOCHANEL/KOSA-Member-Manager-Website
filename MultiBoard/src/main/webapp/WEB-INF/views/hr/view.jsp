@@ -8,7 +8,8 @@
 <title>KOSA</title>
 </head>
 <body>
-	<h1>사원 정보 상세 조회</h1>
+	<h2>사원 정보 상세 조회</h2>
+	<a href = "<c:url value='/'/>">HOME</a>
 	<table border="1">
 	<tr>
 		<th>MEMBER_ID</th>

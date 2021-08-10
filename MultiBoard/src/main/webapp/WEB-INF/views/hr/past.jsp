@@ -18,7 +18,8 @@ private int memberId;
 	private String roleId;
 	
 	
-	<h1>구성원 정보 상세 조회</h1>
+	<h2>구성원 정보 상세 조회</h2>
+	<a href = "<c:url value='/'/>">HOME</a>
 	<table border="1">
 	<tr>
 		<th>MEMBER_ID</th>
