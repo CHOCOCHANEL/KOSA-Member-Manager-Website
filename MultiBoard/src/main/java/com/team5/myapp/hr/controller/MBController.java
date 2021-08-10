@@ -47,9 +47,9 @@ public class MBController {
 		return "hr/list";
 	}
 	
-	@RequestMapping(value="/hr/{employeeId}")
-	public String getMbInfo(@PathVariable int employeeId, Model model) {
-		MBVO mb = mbService.getMBInfo(employeeId);
+	@RequestMapping(value="/hr/{memberId}")
+	public String getMbInfo(@PathVariable int memId, Model model) {
+		MBVO mb = mbService.getMBInfo(memId);
 		model.addAttribute("mb", mb);
 		return "hr/view";
 	}
@@ -94,15 +94,15 @@ public class MBController {
 	/* 구성원 정보 삭제 */
 	// 삭제 시 이메일 입력 요구. GET방식으로 삭제 확인을 위한 이메일 입력 폼으로 forward함.
 	@RequestMapping(value="hr/delete", method=RequestMethod.GET)
-	public String deleteEmp(int empid, Model model) {
-		model.addAttribute("emp", mbService.getMBInfo(empid));
+	public String deleteEmp(int memid, Model model) {
+		model.addAttribute("mem", mbService.getMBInfo(memid));
 		return "hr/deleteform";
 	}
 	
 	/* 구성원 정보 삭제처리 */
 	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
-	public String deleteMB(int mbid, String email, Model model) {
-		mbService.deleteMB(mbid, email);
+	public String deleteMB(int memid, String email, Model model) {
+		mbService.deleteMB(memid, email);
 		return "redirect:/hr";
 	}
 	

@@ -67,6 +67,10 @@
 		</td>
 	</tr>
 	<tr>
+		<th>ROLE_ID</th>
+		<td><input type="text" name="roleId" value="${mb.roleId}"></td>
+	</tr>	
+	<tr>
 		<th>&nbsp;</th>
 		<td>
 			<input type="submit" value="수정">
