@@ -87,4 +87,20 @@ public class MBController {
 		return "redirect:/hr";
 	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
 	}
+	
+	/*구성원 정보 삭제*/
+	@RequestMapping(value="/hr/delete", method=RequestMethod.GET)
+	public String deleteMB(int mbid, Model model){
+		model.addAttribute("mb", mbService.getMBInfo(mbid));
+		return "hr/deleteform";
+	}
+	
+	/* 구성원 정보 수정처리 */
+	// 사원정보 수정 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 수정한 뒤, 사원목로를 redirect함.
+	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
+	public String deleteMB(int mbid, String email, Model model) {
+		mbService.deleteMB(mbid,email);
+		return "redirect:/hr";
+	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
+	}
 }
