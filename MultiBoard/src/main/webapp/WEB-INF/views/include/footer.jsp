@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="col">
-                   <h4>Contact us</h4>
+                   <h4>KOSA 5조</h4>
                    <ul>
-                        <li>Phone: 010 1234 5678</li>
-                        <li>Email: <a href="mailto:xxx@yyy.com" title="Email Us">xxx@yyy.com</a></li>
-                        <li><a href="http://www.yourhost.com">http://www.yourhost.com</a></li>
+                        <li>Phone: 010 5555 5555</li>
+                        <li>Email: <a href="mailto:xxx@yyy.com" title="Email Us">555@555.com</a></li>
+                        <li><a href="http://www.yourhost.com">https://career.sw.or.kr/</a></li>
                    </ul>
                  </div>
             </div>

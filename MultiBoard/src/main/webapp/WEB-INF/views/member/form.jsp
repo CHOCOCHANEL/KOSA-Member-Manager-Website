@@ -110,6 +110,7 @@
 			<input type="text" name="userid" id="userid" value="${member['userid']}" ${empty member.userid ? "" : "readonly"} title="<fmt:message key='USERID_TITLE'/>" pattern="\w+" class="form-control" placeholder="<fmt:message key="MEMBER_ID"/>" required>
 		</div>
 	</div>
+	<br>
 	<div class="form-group">
 		<label class="control-lavel col-sm-2" for="password"><fmt:message key="MEMBER_PW"/></label>
 		<div class="col-sm-4">

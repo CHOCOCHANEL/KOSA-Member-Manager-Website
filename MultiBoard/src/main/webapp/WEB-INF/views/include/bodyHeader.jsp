@@ -28,7 +28,7 @@
             </button>
             <a class="navbar-brand" href="<c:url value="/"/>" title=""><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
             	<fmt:message key="TITLE"/>
-            </a><div style="padding-left:15px; width:200px">http://www.coderby.com</div>
+            </a><div style="padding-left:15px; width:200px">https://career.sw.or.kr/</div>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -54,6 +54,15 @@
 			        	</c:forEach>
 					</ul>
 				</li>
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong><fmt:message key="MEMBER_1"/></strong></a>
+                    <ul class="dropdown-menu">
+                    	<c:forEach var="category" items="${categoryList2}">
+				        <li><a href="<c:url value='/board/cat/${category.categoryId}'/>">${category.categoryName}</a>
+			        	</c:forEach>
+					</ul>
+				</li>
+				
                 <li class="dropdown">
                     <a href='<c:url value="/member/login"/>' class="dropdown-toggle" data-toggle="dropdown"><strong><fmt:message key="MEMBER"/></strong></a>
                     <ul class="dropdown-menu">

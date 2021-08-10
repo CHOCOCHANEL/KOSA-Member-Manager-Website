@@ -28,25 +28,14 @@
 	</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<a href="board/cat/1">카테고리 1번 게시판 리스트 보기</a><br>
-					<a href="board/cat/2">카테고리 2번 게시판 리스트 보기</a><br>
-					<a href="board/cat/3">카테고리 3번 게시판 리스트 보기</a><br>
+					<a href="board/cat/1"><h3>공지사항</h3></a><br>
+					<a href="board/cat/2"><h3>질의응답</h3></a><br>
+					<a href="board/cat/3"><h3>응답하라KOSA</h3></a><br>
 					</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">Curabitur
-					sed bibendum neque, at congue ipsum. Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vivamus mattis a mauris a volutpat. In
-					ullamcorper ex dui, quis suscipit turpis consectetur id. Sed id
-					purus ultrices, maximus augue non, bibendum ex. Duis interdum ante
-					vitae rutrum placerat. Mauris sollicitudin tristique elit ut
-					eleifend. Praesent sed aliquam ante, non pharetra leo. Duis tempus
-					mi quis eleifend rutrum. Quisque tincidunt auctor iaculis.</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">Integer
-					commodo euismod accumsan. Mauris bibendum ante at leo aliquet, eu
-					dictum orci porttitor. Mauris cursus cursus pellentesque. Maecenas
-					a mauris feugiat, lobortis purus at, pellentesque quam. Sed aliquam
-					tellus ac purus pharetra, in blandit orci malesuada. Suspendisse
-					velit diam, bibendum ac odio sed, blandit vehicula tellus. Aenean
-					et euismod ipsum.</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				몇번째 수정인지 알 수 없다~</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				깃은 왜 잘 안되고 난리~</div>
 			</div>
 			<div class="progress">
 		<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -60,7 +49,7 @@
 	</div>
 	<div class="alert alert-info">
 		<ol>
-			<li>Donec vitae suscipit leo. Mauris arcu felis, eleifend id porta.
+			<li>두둥두둥 뭐라고 쓰지~
 		</ol>
 	</div>
 	</div>

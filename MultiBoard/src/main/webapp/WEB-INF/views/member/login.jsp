@@ -28,6 +28,7 @@
 		<label class="control-label col-sm-2" for="id"><fmt:message key="MEMBER_ID"/></label>
 		<div class="col-sm-8">
 			<input type="text" name="userid" id="id" class="form-control" placeholder="<fmt:message key="MEMBER_ID"/>" aria-describedby="basic-addon1">
+		<br>
 		</div>
 	</div>
 	<div class="form-group">
