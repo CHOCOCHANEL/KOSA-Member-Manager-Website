@@ -44,14 +44,15 @@ public class MBController {
 		return "hr/list";
 	}
 	
-	@RequestMapping(value="/hr/{mbid}")
-	public String getMBInfo(@PathVariable int mbid, Model model) {
-		MBVO mb = mbService.getMBInfo(mbid);
+	/* Member 상세 정보 조회 */
+	@RequestMapping(value="/hr/{memberId}")
+	public String getMBInfo(@PathVariable int memberId, Model model) {
+		MBVO mb = mbService.getMBInfo(memberId);
 		model.addAttribute("mb", mb);
 		return "hr/view";
 	}
 	
-	/* 구성원정보 입력 */
+	/* Member 정보 입력 */
 	// GET 방식(사원정보 입력 폼)과 POST 방식(입력받은 데이터 DB에 저장) 구분 처리
 	@RequestMapping(value="/hr/insert", method=RequestMethod.GET)
 	public String insertMB(Model model) {

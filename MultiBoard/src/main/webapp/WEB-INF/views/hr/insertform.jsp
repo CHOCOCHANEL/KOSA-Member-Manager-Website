@@ -47,7 +47,7 @@
 		<td>
 		<select name="managerId">
 		<c:forEach var="manager" items="${managerList}">
-			<option value="${manager.managerId}">${manager.lastName + manager.firstName}</option>
+			<option value="${manager.memberId}">${manager.lastName}${manager.firstName}</option>
 		</c:forEach>
 		</select>
 		</td>
@@ -55,7 +55,13 @@
 	
 	<tr>
 		<th>GROUP_ID</th>
-		<td><input type="text" name="groupId">(0~6)</td>
+		<td>
+		<select name="groupId">
+		<c:forEach var="group" items="${groupList }">
+			<option value="${group.groupId}">${group.groupName}</option>
+		</c:forEach>
+		</select>
+		</td>
 	</tr>
 	
 	<tr>

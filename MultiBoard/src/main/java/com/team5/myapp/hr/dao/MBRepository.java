@@ -151,9 +151,10 @@ public class MBRepository implements IMBRepository {
     @Override
 	public List<Map<String, Object>> getAllManagerId() {
 		String sql = "SELECT DISTINCT "
-				   + "member.manager_id, manager.first_name, manager.last_name "
+				   + "manager.member_id AS memberId, manager.first_name AS firstName, manager.last_name AS lastName "
 				   + "FROM MB member "
-				   + "JOIN MB manager ON (member.manager_id = manager.member_id)";
+				   + "JOIN MB manager ON (member.manager_id = manager.member_id) "
+				   + "ORDER BY memberId";
 		return jdbcTemplate.queryForList(sql);
 	}
 

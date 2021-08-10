@@ -8,10 +8,10 @@
 <title>KOSA</title>
 </head>
 <body>
-	<h2>구성원 목록</h2>
+	<h2>협회원 목록</h2>
 	<h5>Displayed Members : ${count}</h5>
 		<a href = "<c:url value='/'/>">HOME</a>
-		<a href = "<c:url value='/hr/insert'/>">신규 구성원 정보 입력</a>
+		<a href = "<c:url value='/hr/insert'/>">협회원 추가하기</a>
 	<table border = "1">
 		<tr>
 			<th>MEMBER_ID</th>
