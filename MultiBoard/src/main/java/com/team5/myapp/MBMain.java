@@ -6,6 +6,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.team5.myapp.hr.model.MBVO;
+import com.team5.myapp.hr.model.gHistoryVO;
 import com.team5.myapp.hr.service.IMBService;
 
 public class MBMain {
@@ -75,6 +76,16 @@ public class MBMain {
 		System.out.println("== 모든 매니저번호와 매니저이름을 출력");
 		for(Map<String, Object> manager : mbService.getAllManagerId()) {
 			System.out.println(manager);
+		}
+		
+		System.out.println("== 그룹 변경 이력 조회");
+		for(gHistoryVO g : mbService.getGroupHistoryList()) {
+			System.out.println(g);
+		}
+	
+		System.out.println("== 특정 멤버(17)에 대해 그룹 변경 이력 조회");
+		for(gHistoryVO g : mbService.getGroupHistory(17)) {
+			System.out.println(g);
 		}
 		context.close();
 	}

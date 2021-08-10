@@ -120,7 +120,7 @@ public class MBRepository implements IMBRepository {
 	public List<gHistoryVO> getGroupHistory(int memid){
 		String sql = "select * "
 				+ " from GROUP_HISTORY "
-				+ " WHERE manager_id = ? "
+				+ " WHERE member_id = ? "
 				+ " ORDER BY start_date, end_date";
 		return jdbcTemplate.query(sql, new GroupHistoryMapper(), memid);
 	}
