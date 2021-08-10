@@ -20,13 +20,7 @@
 			<th>JOB_ID</th>
 			<th>MANAGER_ID</th>
 			<th>GROUP_ID</th>
-			
-			<th>START_DATE</th>
-			<th>END_DATE</th>
-			<th>GROUP_NAME</th>
 			<th>ROLE_ID</th>
-			<th>ROLE_TITLE</th>
-			<th>JOB_TITLE</th>
 		</tr>
 		<c:forEach var = "mb" items = "${mbList}">
 		<tr>
@@ -38,16 +32,9 @@
 			<td>${mb.jobId}</td>
 			<td>${mb.managerId}</td>
 			<td>${mb.groupId}</td>
-			
-			<td>${mb.startDate}</td>
-			<td>${mb.endDate}</td>
-			<td>${mb.groupName}</td>
 			<td>${mb.roleId}</td>
-			<td>${mb.roleTitle}</td>
-			<td>${mb.jobTitle}</td>
 		</tr>
 		</c:forEach>
 	</table>
-		
 </body>
 </html>

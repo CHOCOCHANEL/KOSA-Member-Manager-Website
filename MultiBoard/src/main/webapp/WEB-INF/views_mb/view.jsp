@@ -44,31 +44,11 @@
 	</tr> 
 	
 	<tr>
-		<th>START_DATE</th>
-		<td>${mb.startDate}</td>
-	</tr>
-	<tr>
-		<th>END_DATE</th>
-		<td>${mb.endDate}</td>
-	</tr>
-		<tr>
-		<th>GROUP_NAME</th>
-		<td>${mb.groupName}</td>
-	</tr>
-		<tr>
 		<th>ROLE_ID</th>
 		<td>${mb.roleId}</td>
 	</tr>
-		<tr>
-		<th>ROLE_TITLE</th>
-		<td>${mb.roleTitle}</td>
-	</tr>
-		<tr>
-		<th>JOB_TITLE</th>
-		<td>${mb.jobTitle}</td>
-	</tr>
 	</table>
-	<a href="update?empid=${emp.employeeId}">수정하기</a>
-	<a href="delete?empid=${emp.employeeId}">삭제하기</a>
+	<a href="update?empid=${mb.mbId}">수정하기</a>
+	<a href="delete?empid=${mb.mbId}">삭제하기</a>
 </body>
 </html>
