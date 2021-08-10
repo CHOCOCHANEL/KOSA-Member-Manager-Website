@@ -44,7 +44,7 @@ public class MBController {
 		return "hr/list";
 	}
 	
-	@RequestMapping(value="/hr/{mdid}")
+	@RequestMapping(value="/hr/{mbid}")
 	public String getMBInfo(@PathVariable int mbid, Model model) {
 		MBVO mb = mbService.getMBInfo(mbid);
 		model.addAttribute("mb", mb);
@@ -101,21 +101,6 @@ public class MBController {
 	public String deleteMB(int memid, String email, Model model) {
 		mbService.deleteMB(memid, email);
 		return "redirect:/hr";
-	}
-	
-	/* 구성원 과거 조 정보 전부 조회*/
-	@RequestMapping(value= {"/hr", "/hr/past"})
-	public String getAllHistory(Model model) {
-		List<gHistoryVO> pastList = mbService.getGroupHistoryList();
-		model.addAttribute("pastList", pastList);
-		return "hr/past";
-	}
-	/*특정 구성원 과거 조 정보 조회*/
-	@RequestMapping(value= "/hr/{mbId}")
-	public String getMbHistoy(@PathVariable int memId, Model model) {
-		List<gHistoryVO> gH = mbService.getGroupHistory(memId);
-		model.addAttribute("gH", gH);
-		return "hr/viewGroup";
 	}
 	
 	/* 에러 처리 */
