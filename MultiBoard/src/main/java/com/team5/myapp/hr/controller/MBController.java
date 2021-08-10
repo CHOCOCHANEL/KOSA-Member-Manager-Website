@@ -72,7 +72,6 @@ public class MBController {
 	/* 구성원 정보 수정 */
 	@RequestMapping(value="/hr/update", method=RequestMethod.GET)
 	public String updateMB(int mbid, Model model){
-		System.out.println("aa");
 		model.addAttribute("mb", mbService.getMBInfo(mbid));
 		model.addAttribute("jobList", mbService.getAllJobId());
 		model.addAttribute("groupList", mbService.getAllGroupId());
