@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true"%>
+<!DOCTYPE html> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="i18n/board" />
-<!DOCTYPE html> 
 <html>
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
 <body>
@@ -23,6 +23,7 @@
         </div>
     </div>
 	<div class="content">
+
 	<table class="table table-bordered">
 	<tr class="pc">
 		<td colspan=2 align="right">
@@ -57,9 +58,11 @@
 	<tr>
 		<td><fmt:message key="FILE"/></td>
 		<td>
+		<%--c:if test="${!empty sessionScope.userid}"--%>
 		<c:set var="len" value="${fn:length(board.fileName)}"/>
 		<c:set var="filetype" value="${fn:toUpperCase(fn:substring(board.fileName, len-4, len))}"/>
 		<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}"><img src='<c:url value="/file/${board.fileId}"/>' class="img-thumbnail"><br></c:if>
+		<%--/c:if--%>
 		<a href='<c:url value="/file/${board.fileId}"/>'>${board.fileName} (<fmt:formatNumber>${board.fileSize}</fmt:formatNumber>byte)</a>
 		</td>
 	</tr>

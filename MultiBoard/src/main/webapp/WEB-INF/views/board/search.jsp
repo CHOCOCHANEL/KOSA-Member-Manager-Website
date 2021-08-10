@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true"%>
+<!DOCTYPE html> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="i18n/board" />
 <%@ taglib prefix="jk" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html> 
 <html>
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
 <body>
