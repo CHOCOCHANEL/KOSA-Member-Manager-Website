@@ -48,7 +48,7 @@
 		<td>${mb.roleId}</td>
 	</tr>
 	</table>
-	<a href="update?empid=${mb.memberId}">수정하기</a>
-	<a href="delete?empid=${mb.memberId}">삭제하기</a>
+	<a href="update?mbid=${mb.memberId}">수정하기</a>
+	<a href="delete?mbid=${mb.memberId}">삭제하기</a>
 </body>
 </html>

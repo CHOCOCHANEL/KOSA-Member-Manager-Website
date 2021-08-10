@@ -63,15 +63,16 @@ public class MBController {
 	
 	/* 구성원 정보 입력 처리 */
 	// 사원정보 입력 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 저장한 뒤, 사원목록을 redirect함.
-	@RequestMapping(value="hr/insert", method=RequestMethod.POST)
+	@RequestMapping(value="/hr/insert", method=RequestMethod.POST)
 	public String insertMB(MBVO mb, Model model) {
 		mbService.insertMB(mb);
 		return "redirect:/hr";
 	}
 	
 	/* 구성원 정보 수정 */
-	@RequestMapping(value="hr/update", method=RequestMethod.GET)
-	public String updateEmp(int mbid, Model model) {
+	@RequestMapping(value="/hr/update", method=RequestMethod.GET)
+	public String updateMB(int mbid, Model model){
+		System.out.println("aa");
 		model.addAttribute("mb", mbService.getMBInfo(mbid));
 		model.addAttribute("jobList", mbService.getAllJobId());
 		model.addAttribute("groupList", mbService.getAllGroupId());
@@ -86,30 +87,5 @@ public class MBController {
 		mbService.updateMB(mb);
 		return "redirect:/hr";
 	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
-	}
-	
-	/* 구성원 정보 삭제 */
-	// 삭제 시 이메일 입력 요구. GET방식으로 삭제 확인을 위한 이메일 입력 폼으로 forward함.
-	@RequestMapping(value="hr/delete", method=RequestMethod.GET)
-	public String deleteEmp(int memid, Model model) {
-		model.addAttribute("mem", mbService.getMBInfo(memid));
-		return "hr/deleteform";
-	}
-	
-	/* 구성원 정보 삭제처리 */
-	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
-	public String deleteMB(int memid, String email, Model model) {
-		mbService.deleteMB(memid, email);
-		return "redirect:/hr";
-	}
-	
-	/* 에러 처리 */
-	@ExceptionHandler({RuntimeException.class})
-	public ModelAndView runtimeException(HttpServletRequest request, Exception ex) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("url", request.getRequestURI());
-		mav.addObject("exception", ex);
-		mav.setViewName("error/runtime");
-		return mav;
 	}
 }
