@@ -84,10 +84,10 @@ public class MBRepository implements IMBRepository {
 
 	@Override
 	public void updateMB(MBVO mb) {
-		String sql = "update employees "
-				    +"set first_name=?, last_name=?, email=?, phone_number=?, "
-				    +"job_id?, manager_id?, group_id=?, role_id = ?"
-				    +"from MB where member_id=?";
+		String sql = "UPDATE MB "
+				    +"SET first_name=?, last_name=?, email=?, phone_number=?, "
+				    +"job_id=?, manager_id=?, group_id=?, role_id=? "
+				    +"WHERE member_id=?";
 		jdbcTemplate.update(sql, mb.getFirstName(),
 								 mb.getLastName(),
 								 mb.getEmail(),
@@ -134,7 +134,7 @@ public class MBRepository implements IMBRepository {
 
 	@Override
 	public void deleteMB(int memid, String email) {
-		String sql = "delete from MB where memeber_id=? and email=?";
+		String sql = "DELETE from MB WHERE member_id=? and email=?";
 		//이메일 말고 다른 것으로도 변경가능~
 		jdbcTemplate.update(sql, memid, email);
 	}
@@ -149,7 +149,8 @@ public class MBRepository implements IMBRepository {
 
     @Override
 	public List<Map<String, Object>> getAllManagerId() {
-		String sql = "SELECT member.manager_id, manager.first_name, manager.last_name "
+		String sql = "SELECT DISTINCT "
+				   + "member.manager_id, manager.first_name, manager.last_name "
 				   + "FROM MB member "
 				   + "JOIN MB manager ON (member.manager_id = manager.member_id)";
 		return jdbcTemplate.queryForList(sql);
