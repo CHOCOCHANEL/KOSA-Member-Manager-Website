@@ -51,16 +51,12 @@
 		</select>
 		</td>
 	</tr>
+	
 	<tr>
 		<th>GROUP_ID</th>
-		<td>
-		<select name="groupId">
-		<c:forEach var="group" items="${groupList}">
-			<option value="${group.groupId}">${group.groupId + "조" + group.groupName}</option>
-		</c:forEach>
-		</select>
-		</td>
-	</tr> 
+		<td><input type="text" name="groupId">(0~6)</td>
+	</tr>
+	
 	<tr>
 		<th>ROLE_ID</th>
 		<td><input type="text" name="roleId">GL(Leader)/GM(Manager)</td>
