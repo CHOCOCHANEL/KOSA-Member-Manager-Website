@@ -96,7 +96,8 @@ public class MBRepository implements IMBRepository {
 								 mb.getManagerId(),
 								 mb.getGroupId(),
 								 mb.getRoleId(),
-								 mb.getMemberId());
+								 mb.getMemberId()
+								 );
 	}
 
 	@Override

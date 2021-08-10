@@ -8,7 +8,7 @@
 <title>KOSA</title>
 </head>
 <body>
-	<h1>사원 정보 입력</h1>
+	<h1>구성원 정보 입력</h1>
 	<form action="./insert" method="post">
 	<table border="1">
 	<tr>

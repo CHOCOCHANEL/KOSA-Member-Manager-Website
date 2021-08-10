@@ -59,6 +59,7 @@ public class MBController {
 		model.addAttribute("groupList", mbService.getAllGroupId());
 		model.addAttribute("managerList", mbService.getAllManagerId());
 		return "hr/insertform";
+		
 	}
 	
 	/* 구성원 정보 입력 처리 */
@@ -95,12 +96,31 @@ public class MBController {
 		return "hr/deleteform";
 	}
 	
-	/* 구성원 정보 수정처리 */
+	/* 구성원 정보 삭제처리 */
 	// 사원정보 수정 폼에서 저장하면 실행됨. view로 forward하지 않고, 사원정보를 수정한 뒤, 사원목로를 redirect함.
 	@RequestMapping(value="hr/delete", method=RequestMethod.POST)
 	public String deleteMB(int mbid, String email, Model model) {
 		mbService.deleteMB(mbid,email);
 		return "redirect:/hr";
 	//	return "redirect:/hr"; // 수정 후 사원 목록조회 화면으로 이동
+	}
+	
+	/*모든 구성원 과거 조 정보 조회*/
+	@RequestMapping(value= {"/history"})
+	public String getGroupHistoryList(Model model)
+	{
+		List<gHistoryVO> historyList = mbService.getGroupHistoryList();
+		model.addAttribute("historyList", historyList);
+		return "hr/history";
+	}
+	
+	
+	/*특정 구성원의 과거 조 정보 조회*/
+	@RequestMapping(value= "/past/{mbid}")
+	public String getGroupHistory(@PathVariable int mbId, Model model) 
+	{
+		List<gHistoryVO> history = mbService.getGroupHistory(mbId);
+		model.addAttribute("history",history);
+		return "hr/past";
 	}
 }
