@@ -106,7 +106,7 @@ public class MBController {
 	/* 구성원 과거 조 정보 전부 조회*/
 	@RequestMapping(value= {"/hr", "/hr/past"})
 	public String getAllHistory(Model model) {
-		List<MBVO> pastList = mbService.getMBList();
+		List<gHistoryVO> pastList = mbService.getGroupHistoryList();
 		model.addAttribute("pastList", pastList);
 		return "hr/past";
 	}
