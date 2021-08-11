@@ -113,7 +113,7 @@ public class MBController {
 	}
 	
 	/*모든 구성원 과거 조 정보 조회*/
-	@RequestMapping(value= {"/history"})
+	@RequestMapping(value= {"hr/history"})
 	public String getGroupHistoryList(Model model)
 	{
 		List<gHistoryVO> historyList = mbService.getGroupHistoryList();
@@ -123,7 +123,7 @@ public class MBController {
 	
 	
 	/*특정 구성원의 과거 조 정보 조회*/
-	@RequestMapping(value= "/past/{memid}")
+	@RequestMapping(value= "hr/past/{mbid}")
 	public String getGroupHistory(@PathVariable int mbid, Model model) 
 	{
 		List<gHistoryVO> history = mbService.getGroupHistory(mbid);

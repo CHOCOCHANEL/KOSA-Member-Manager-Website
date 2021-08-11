@@ -64,7 +64,7 @@ public class MBRepository implements IMBRepository {
 
 	@Override
 	public List<MBVO> getMBList() {
-		String sql ="select * from MB";
+		String sql ="SELECT * FROM MB ORDER BY member_id";
 		return jdbcTemplate.query(sql, new MBMapper());
 	}
 	

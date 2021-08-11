@@ -57,7 +57,7 @@
 		<th>GROUP_ID</th>
 		<td>
 		<select name="groupId">
-		<c:forEach var="group" items="${groupList }">
+		<c:forEach var="group" items="${groupList}">
 			<option value="${group.groupId}">${group.groupName}</option>
 		</c:forEach>
 		</select>
