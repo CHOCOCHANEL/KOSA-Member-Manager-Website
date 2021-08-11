@@ -60,7 +60,6 @@
 				        <li><a href="<c:url value='/hr'/>">협회원 목록보기</a>
 			        	<li><a href="<c:url value='/hr/insert'/>">협회원 추가하기</a>
 			        	<li><a href="<c:url value='/hr/history'/>">조 변경 내역보기</a>
-			        	<li><a href="<c:url value='/hr'/>">학생 활동 내역보기</a>
 					</ul>
 				</li>
 				

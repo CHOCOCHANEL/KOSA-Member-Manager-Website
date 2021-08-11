@@ -63,12 +63,10 @@
 		</select>
 		</td>
 	</tr>
-	
 	<tr>
 		<th>ROLE_ID</th>
 		<td><input type="text" name="roleId">GL(Leader)/GM(Member)</td>
 	</tr>
-	
 	<tr>
 		<th>&nbsp;</th>
 		<td>
