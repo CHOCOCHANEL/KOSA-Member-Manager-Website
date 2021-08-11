@@ -54,11 +54,11 @@
 	</tr>
 	
 	<tr>
-		<th>GROUP_ID</th>
+		<th>GROUP_NAME</th>
 		<td>
 		<select name="groupId">
 		<c:forEach var="group" items="${groupList}">
-			<option value="${group.groupId}">${group.groupName}</option>
+			<option value="${group.groupId}">${group.groupId}조.${group.groupName}</option>
 		</c:forEach>
 		</select>
 		</td>

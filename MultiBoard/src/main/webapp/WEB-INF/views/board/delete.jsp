@@ -38,7 +38,7 @@
 		</form>
 		<div class="form-group pc"><div class="col-sm-10">
 		<c:if test="${ !empty sessionScope.userid}">
-		로그인 사용자는 아무 비밀번호나 입력해도 글이 삭제됩니다.
+		게시물 작성자가 입력한 비밀번호를 입력해주세요.
 		</c:if>
 		</div></div>
 	</div>

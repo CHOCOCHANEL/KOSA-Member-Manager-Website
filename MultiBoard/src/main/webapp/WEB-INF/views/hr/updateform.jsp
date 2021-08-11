@@ -65,15 +65,15 @@
 	</tr>
 	
 	<tr>
-		<th>GROUP_ID</th>
+		<th>GROUP_NAME</th>
 		<td>
 		<select name="groupId">
 		<c:forEach var="group" items="${groupList}">
 			<c:if test="${mb.groupId == group.groupId}">
-				<option value="${group.groupId}" selected>${group.groupName}</option>
+				<option value="${group.groupId}" selected>${group.groupId}조.${group.groupName}</option>
 			</c:if>
 			<c:if test="${mb.groupId != group.groupId}">
-				<option value="${group.groupId}">${group.groupName}</option>
+				<option value="${group.groupId}">${group.groupId}조.${group.groupName}</option>
 			</c:if>
 		</c:forEach>
 		</select>
