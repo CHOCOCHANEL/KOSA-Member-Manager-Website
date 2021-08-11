@@ -24,9 +24,6 @@
     </div>
 
 	<div class="content">
-	<div class="alert alert-warning" class="page-header">
-		<h3><fmt:message key="WELCOME_MESSAGE"/></h3>
-	</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 					<a href="board/cat/1"><h3>공지사항</h3></a><br>

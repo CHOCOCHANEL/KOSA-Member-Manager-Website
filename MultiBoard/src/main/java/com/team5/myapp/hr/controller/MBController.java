@@ -116,16 +116,17 @@ public class MBController {
 	@RequestMapping(value= {"hr/history"})
 	public String getGroupHistoryList(Model model)
 	{
-		List<gHistoryVO> historyList = mbService.getGroupHistoryList();
-		model.addAttribute("historyList", historyList);
+		model.addAttribute("memberList", mbService.getMBList());
+		model.addAttribute("historyList", mbService.getGroupHistoryList());
 		return "hr/history";
 	}
 	
 	/*특정 구성원의 과거 조 정보 조회*/
 	@RequestMapping(value= "hr/past/{mbid}")
 	public String getGroupHistory(@PathVariable int mbid, Model model) 
-	{
+	{	
 		List<gHistoryVO> history = mbService.getGroupHistory(mbid);
+		
 		model.addAttribute("history",history);
 		return "hr/past";
 	}
