@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy View</title>
+<title>KOSA</title>
 </head>
 <body>
-	<h2>구성원 과거 조 조회</h2>
+	<h2>조 변경 내역보기</h2>
 	<a href = "<c:url value='/'/>">HOME</a>
+	<form action="." method="get">
+	</form>
 	<table border="1">
 	<tr>
 	<th>MEMBER_ID</th>

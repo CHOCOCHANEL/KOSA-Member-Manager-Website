@@ -121,7 +121,6 @@ public class MBController {
 		return "hr/history";
 	}
 	
-	
 	/*특정 구성원의 과거 조 정보 조회*/
 	@RequestMapping(value= "hr/past/{mbid}")
 	public String getGroupHistory(@PathVariable int mbid, Model model) 
