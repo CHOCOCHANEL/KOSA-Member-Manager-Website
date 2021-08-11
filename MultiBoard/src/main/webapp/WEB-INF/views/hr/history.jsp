@@ -27,6 +27,7 @@
 	</tr>
 	<tr>
 	<th>MEMBER_ID</th>
+	<th>MEMBER_NAME</th>
 	<th>START_DATE</th>
 	<th>END_DATE</th>
 	<th>GROUP_ID</th>
@@ -37,6 +38,12 @@
 	<c:forEach var = "history" items = "${historyList}">
 	<tr>
 	<td>${history.memberId}</td>
+	<td><c:forEach var="member" items="${memberList}">
+			<c:if test="${member.memberId == mbid}">
+				${member.lastName}${member.firstName}
+			</c:if>
+		</c:forEach>	
+	</td>
 	<td>${history.startDate}</td>
 	<td>${history.endDate}</td>
 	<td>${history.groupId}</td>
