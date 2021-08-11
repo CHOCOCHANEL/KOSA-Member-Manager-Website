@@ -10,7 +10,7 @@
 <body>
 	<h2>학생 활동 내역보기</h2>
 	<a href = "<c:url value='/'/>">HOME</a>
-	<form action="./history/" method="post">
+	<form action="./history" method="post">
 	<table border="1">
 	<tr>
 	<th>이름으로 조회</th>
