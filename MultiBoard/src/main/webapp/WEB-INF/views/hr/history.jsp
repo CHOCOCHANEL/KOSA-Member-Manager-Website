@@ -5,12 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoderBy View</title>
+<title>KOSA</title>
 </head>
 <body>
-	<h2>구성원 과거 조 조회</h2>
+	<h2>조 변경 내역보기</h2>
 	<a href = "<c:url value='/'/>">HOME</a>
+	<form action="." method="get">
+	</form>
 	<table border="1">
+	
+	<tr>
+		<th>이름으로 조회</th>
+		<td>
+			<select name="memberId">
+				<c:forEach var="member" items="${memberList}">
+					<option value="$member.memberId">${member.lastName}${member.firstName}</option>
+				</c:forEach>
+			</select>
+		</td>
+	</tr>
+	
 	<tr>
 	<th>MEMBER_ID</th>
 	<th>START_DATE</th>
